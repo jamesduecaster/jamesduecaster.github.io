@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 16 Sep 2016 6:42 PM - JD
+ * last update: 16 Sep 2016 6:50 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -83,7 +83,7 @@ function loadHTMLFragment(url, fragment, fragmentSection) {
         //var fragmentContents = $("<div>").append($.parseHTML(data)).find('h3:contains("' + fragment + '")').parent().next();
 
         var fragmentContents = $("<div>").append($.parseHTML(data)).find('.' + fragment);
-        var contactsContents = fragmentContents.find('#contactsrhf').html();
+        var contactsContents = fragmentContents.find('.contactsbody').html();
 
         var fragmentSectionContents = fragmentContents.find('h3:contains("' + fragmentSection + '")').parent().next();
 
