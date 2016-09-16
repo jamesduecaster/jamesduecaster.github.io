@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 16 Sep 2016 5:59 PM - JD
+ * last update: 16 Sep 2016 6:14 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -94,6 +94,9 @@ function loadHTMLFragment(url, fragment) {
         $('.intro').html(introContents);
         $('figure.scenario').html(imgContents);
         $('.country-data .accordion').html(accordionContents);
+
+        $('.accordion').accordion('destroy');
+        $('.accordion').accordion();
 
         // $(target + ' a.generic-modal-link').replaceWith(function() {
         //     return $(this).contents();
