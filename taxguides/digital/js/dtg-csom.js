@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 16 Sep 2016 6:14 PM - JD
+ * last update: 16 Sep 2016 6:42 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -72,7 +72,7 @@ function getCountryList() {
 
 }
 
-function loadHTMLFragment(url, fragment) {
+function loadHTMLFragment(url, fragment, fragmentSection) {
 
     $.ajax({
         url: url,
@@ -80,11 +80,16 @@ function loadHTMLFragment(url, fragment) {
         dataType: 'html'
     }).done(function(data) {
 
-        var fragmentContents = $("<div>").append($.parseHTML(data)).find('h3:contains("' + fragment + '")').parent().next();
+        //var fragmentContents = $("<div>").append($.parseHTML(data)).find('h3:contains("' + fragment + '")').parent().next();
 
-        var introContents = fragmentContents.find('p:eq(0)').html();
-        var imgContents = fragmentContents.find('p:eq(1)').html();
-        var accordionContents = fragmentContents.find('.subaccordion:eq(0)').html()
+        var fragmentContents = $("<div>").append($.parseHTML(data)).find('.' + fragment);
+        var contactsContents = fragmentContents.find('#contactsrhf').html();
+
+        var fragmentSectionContents = fragmentContents.find('h3:contains("' + fragmentSection + '")').parent().next();
+
+        var introContents = fragmentSectionContents.find('p:eq(0)').html();
+        var imgContents = fragmentSectionContents.find('p:eq(1)').html();
+        var accordionContents = fragmentSectionContents.find('.subaccordion:eq(0)').html();
 
         //console.log('fragmentContents');
         //console.log(fragmentContents);
@@ -96,7 +101,9 @@ function loadHTMLFragment(url, fragment) {
         $('.country-data .accordion').html(accordionContents);
 
         $('.accordion').accordion('destroy');
-        $('.accordion').accordion();
+        $('.accordion').accordion({collapsible: true});
+
+        $('.dtg-contacts').html(contactsContents);
 
         // $(target + ' a.generic-modal-link').replaceWith(function() {
         //     return $(this).contents();
@@ -171,7 +178,7 @@ $(document).ready(function() {
 
         $('.retrieving-contents').show();
 
-        loadHTMLFragment(thisURL, taxGuideOperatingModel);
+        loadHTMLFragment(thisURL, 'maincontent', taxGuideOperatingModel);
 
         //$('#countryB').text(thisCountryName);
 
