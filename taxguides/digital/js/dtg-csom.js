@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 16 Sep 2016 1:42 PM - JD
+ * last update: 16 Sep 2016 3:16 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -9,6 +9,7 @@ var isPreview = location.href.indexOf("eycompreview") >= 0;
 var isProduction = isLocal === false && isDropbox === false && isPreview === false;
 
 var taxGuidePath = '/GL/en/Services/Tax/2015-Worldwide-Cloud-Computing-Tax-Guide';
+var taxGuideOperatingModel;
 
 function getCountryList() {
 
@@ -122,6 +123,10 @@ $(document).ready(function() {
 
     $('.cookienotification').remove();
 
+    $('<div class="retrieving-contents"><img src="/Media/vwLUExtFile/jquery/$FILE/ajax-loader.gif"> Getting content...</div>').appendTo('body');
+
+    taxGuideOperatingModel = $('h2[data-scenario-title]').attr('data-scenario-title');
+
     getCountryList();
 
     thisCountryISO = $('#country-dataselector option:selected').val();
@@ -152,7 +157,7 @@ $(document).ready(function() {
 
         $('.retrieving-contents').show();
 
-        loadHTMLFragment(thisURL, operatingModel, '.intro');
+        loadHTMLFragment(thisURL, taxGuideOperatingModel, '.intro');
 
         //$('#countryB').text(thisCountryName);
 
