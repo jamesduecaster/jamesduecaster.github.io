@@ -74,6 +74,10 @@ function getCountryList() {
 
 function loadHTMLFragment(url, fragment, target) {
 
+  console.log(url);
+  console.log(fragment);
+  console.log(target);
+
     $.ajax({
         url: url,
         type: 'GET',
@@ -81,6 +85,9 @@ function loadHTMLFragment(url, fragment, target) {
     }).done(function(data) {
 
         var fragmentContents = $("<div>").append($.parseHTML(data)).find('h3:contains("' + fragment + '")').parent().next().html();
+
+        console.log('fragmentContents');
+        console.log(fragmentContents);
 
         $(target).html(fragmentContents);
 
