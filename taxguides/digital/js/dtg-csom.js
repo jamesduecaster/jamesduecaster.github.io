@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 16 Sep 2016 3:27 PM - JD
+ * last update: 16 Sep 2016 4:21 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -132,7 +132,7 @@ $(document).ready(function() {
 
     $('<div class="retrieving-contents"><img src="/Media/vwLUExtFile/jquery/$FILE/ajax-loader.gif"> Getting content...</div>').appendTo('body');
 
-    taxGuideOperatingModel = $('h2[data-operating-model]').attr('data-operating-model');
+    taxGuideOperatingModel = $('h2[data-operating-model-title]').attr('data-operating-model-title');
 
     getCountryList();
 
