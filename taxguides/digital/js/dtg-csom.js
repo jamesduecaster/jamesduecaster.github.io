@@ -72,11 +72,7 @@ function getCountryList() {
 
 }
 
-function loadHTMLFragment(url, fragment, target) {
-
-  console.log(url);
-  console.log(fragment);
-  console.log(target);
+function loadHTMLFragment(url, fragment) {
 
     $.ajax({
         url: url,
@@ -84,16 +80,22 @@ function loadHTMLFragment(url, fragment, target) {
         dataType: 'html'
     }).done(function(data) {
 
-        var fragmentContents = $("<div>").append($.parseHTML(data)).find('h3:contains("' + fragment + '")').parent().next().html();
+        var fragmentContents = $("<div>").append($.parseHTML(data)).find('h3:contains("' + fragment + '")').parent().next();
 
-        console.log('fragmentContents');
-        console.log(fragmentContents);
+        var introContents = fragmentContents.find('p:eq(0)').html();
+        var imgContents = fragmentContents.find('p:eq(1)').html();
 
-        $(target).html(fragmentContents);
+        //console.log('fragmentContents');
+        //console.log(fragmentContents);
 
-        $(target + ' a.generic-modal-link').replaceWith(function() {
-            return $(this).contents();
-        });
+        //$(target).html(fragmentContents);
+
+        $('.intro').html(introContents);
+        $('figure.scenario').html(imgContents);
+
+        // $(target + ' a.generic-modal-link').replaceWith(function() {
+        //     return $(this).contents();
+        // });
 
         $('.retrieving-contents').hide();
 
@@ -164,7 +166,7 @@ $(document).ready(function() {
 
         $('.retrieving-contents').show();
 
-        loadHTMLFragment(thisURL, taxGuideOperatingModel, '.intro');
+        loadHTMLFragment(thisURL, taxGuideOperatingModel);
 
         //$('#countryB').text(thisCountryName);
 
