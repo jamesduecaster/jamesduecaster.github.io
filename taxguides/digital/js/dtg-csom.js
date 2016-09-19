@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 Sep 2016 9:34 AM - JD
+ * last update: 19 Sep 2016 12:11 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -10,6 +10,7 @@ var isProduction = isLocal === false && isDropbox === false && isPreview === fal
 
 var taxGuidePath = '/GL/en/Services/Tax/2015-Worldwide-Cloud-Computing-Tax-Guide';
 var taxGuideOperatingModel;
+var taxGuideURL = '';
 
 function getCountryList() {
 
@@ -43,12 +44,6 @@ function getCountryList() {
 
                     countryName = $(this).text();
                     countryISO = $(this).attr('iso');
-
-                    if(countryISO === 'AU' || countryISO === 'BR' || countryISO === 'CA' || countryISO === 'FR' || countryISO === 'IE' || countryISO === 'NZ' || countryISO === 'US'){
-                      tempStyle = ' class="active"';
-                    } else {
-                      tempStyle = '';
-                    }
 
                     if(output === undefined) {
                       output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
@@ -110,10 +105,6 @@ function loadHTMLFragment(url, fragment, fragmentSection) {
 
         $('.dtg-contacts').html(contactsContents);
 
-        // $(target + ' a.generic-modal-link').replaceWith(function() {
-        //     return $(this).contents();
-        // });
-
         $('.retrieving-contents').hide();
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -155,37 +146,27 @@ $(document).ready(function() {
 
     getCountryList();
 
-    thisCountryISO = $('#country-dataselector option:selected').val();
-
+    // thisCountryISO = $('#country-dataselector option:selected').val();
     thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
 
-    var countryApreviousText = $('#countryA').text();
+    taxGuideURL = taxGuidePath + '---' + thisCountryName;
 
-    $('.accordion div:nth-child(-n+4)').hover(function() {
+    $('.retrieving-contents').show();
 
-        $('#countryA').text(thisCountryName);
-        $('#countryB').text('Country B');
+    loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
 
-    }, function() {
-
-        $('#countryA').text(countryApreviousText);
-        $('#countryB').text(thisCountryName);
-
-    });
 
     $('#country-dataselector').on('change', function() {
 
-        thisCountryISO = $('#country-dataselector').val();
+        // thisCountryISO = $('#country-dataselector').val();
 
         thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
 
-        var thisURL = taxGuidePath + '---' + thisCountryName;
+        taxGuideURL = taxGuidePath + '---' + thisCountryName;
 
         $('.retrieving-contents').show();
 
-        loadHTMLFragment(thisURL, 'maincontent', taxGuideOperatingModel);
-
-        //$('#countryB').text(thisCountryName);
+        loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
 
     });
 
