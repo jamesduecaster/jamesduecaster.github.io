@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 Sep 2016 3:34 PM - JD
+ * last update: 19 Sep 2016 3:44 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -187,15 +187,17 @@ $(document).ready(function() {
 
         $('#country-dataselector option').each(function(){
 
-          var thisOption = $(this).html().toLowerCase();
+          var thisOption = $(this).val();
           console.log(thisOption);
 
-          if(thisOption === currentHash.toLowerCase()) {
+          if(thisOption === currentHash.toUpperCase()) {
 
-            thisCountryName = currentHash.replace(/ /g, '-');
+            thisCountryName = $(this).html();
+            console.log(thisCountryName);
+
             taxGuideURL = taxGuidePath + '---' + thisCountryName;
 
-            $('#country-dataselector').val(currentHash);
+            $('#country-dataselector').val(thisCountryName);
 
             $('.retrieving-contents').show();
             loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
