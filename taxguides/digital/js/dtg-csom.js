@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 Sep 2016 2:16 PM - JD
+ * last update: 19 Sep 2016 2:24 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -44,6 +44,12 @@ function getCountryList() {
 
                     countryName = $(this).text();
                     countryISO = $(this).attr('iso');
+
+                    if(countryISO === 'XX' || countryISO === 'XY'){
+                      tempStyle = ' class="active"';
+                    } else {
+                      tempStyle = '';
+                    }
 
                     if(output === undefined) {
                       output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
