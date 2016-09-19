@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 Sep 2016 2:24 PM - JD
+ * last update: 19 Sep 2016 2:36 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -21,7 +21,7 @@ function getCountryList() {
       async: false
   }).done(function(data) {
 
-            var gdpgTitle = "Worldwide Estate and Inheritance Tax Guide";
+            var gdpgTitle = "Worldwide Cloud Computing Tax Guide";
             var taxGuideTitle;
       			$(data).find('destination').each(function() {
 
