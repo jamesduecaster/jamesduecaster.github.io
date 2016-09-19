@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 Sep 2016 2:36 PM - JD
+ * last update: 19 Sep 2016 3:30 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -152,16 +152,6 @@ $(document).ready(function() {
 
     getCountryList();
 
-    thisCountryISO = $('#country-dataselector option:selected').val();
-    thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
-
-    taxGuideURL = taxGuidePath + '---' + thisCountryName;
-
-    $('.retrieving-contents').show();
-
-    loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
-
-
     $('#country-dataselector').on('change', function() {
 
         thisCountryISO = $('#country-dataselector').val();
@@ -177,5 +167,47 @@ $(document).ready(function() {
 
     onScrollInit($('.os-animation'));
     onScrollInit($('.staggered-animation'), $('.staggered-animation-container'));
+
+    $(window).hashchange(function() {
+
+      var currentHash = location.hash;
+      console.log(currentHash);
+      if (currentHash === '') {
+
+        thisCountryISO = $('#country-dataselector option:selected').val();
+        thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
+        thisCountryName = thisCountryName.replace(/ /g, '-');
+        taxGuideURL = taxGuidePath + '---' + thisCountryName;
+
+        $('.retrieving-contents').show();
+
+        loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
+
+      } else {
+
+        $('#country-dataselector option').each(function(){
+
+          var thisOption = $(this).html().toLowerCase();
+          console.log(thisOption);
+
+          if(thisOption === currentHash.toLowerCase()) {
+
+            thisCountryName = currentHash.replace(/ /g, '-');
+            taxGuideURL = taxGuidePath + '---' + thisCountryName;
+
+            $('#country-dataselector').val(currentHash);
+
+            $('.retrieving-contents').show();
+            loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
+
+          }
+
+        });
+
+      }
+
+    }
+
+    $(window).hashchange();
 
 });
