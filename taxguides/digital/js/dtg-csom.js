@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 20 Sep 2016 3:47 PM - JD
+ * last update: 20 Sep 2016 5:23 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -92,11 +92,6 @@ function loadHTMLFragment(url, fragment, fragmentSection) {
         var imgContents = fragmentSectionContents.find('p:eq(1)').html();
         var accordionContents = fragmentSectionContents.find('.subaccordion:eq(0)').html();
 
-        //console.log('fragmentContents');
-        //console.log(fragmentContents);
-
-        //$(target).html(fragmentContents);
-
         $('.intro').html(introContents);
         $('figure.scenario').html(imgContents);
         $('.country-data .accordion').html(accordionContents);
@@ -148,9 +143,13 @@ $(document).ready(function() {
 
     $('<div class="retrieving-contents"><img src="/Media/vwLUExtFile/jquery/$FILE/ajax-loader.gif"> Getting content...</div>').appendTo('body');
 
-    taxGuideOperatingModel = $('h2[data-operating-model-title]').attr('data-operating-model-title');
+    taxGuideOperatingModel = $('[data-operating-model-title]').attr('data-operating-model-title');
 
     getCountryList();
+
+    $('#model-dataselector').on('change', function() {
+
+    });
 
     $('#country-dataselector').on('change', function() {
 
