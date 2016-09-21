@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 20 Sep 2016 11:32 PM - JD
+ * last update: 21 Sep 2016 12:07 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -136,6 +136,7 @@ function onScrollInit(items, trigger) {
 }
 
 var thisCountryISO;
+var thisCountryName;
 var thisOperatingModel;
 
 $(document).ready(function() {
@@ -177,8 +178,8 @@ $(document).ready(function() {
             thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
             $('#countryName').html(thisCountryName);
 
-            thisCountryName = thisCountryName.replace(/ /g, '-');
-            taxGuideURL = taxGuidePath + '---' + thisCountryName;
+            var thisCountryNameDash = thisCountryName.replace(/ /g, '-');
+            taxGuideURL = taxGuidePath + '---' + thisCountryNameDash;
 
             thisOperatingModel = $('#model-dataselector option:selected').val();
 
@@ -201,9 +202,9 @@ $(document).ready(function() {
                     thisCountryName = $(this).html();
                     $('#countryName').html(thisCountryName);
 
-                    thisCountryName = thisCountryName.replace(/ /g, '-');
+                    var thisCountryNameDash = thisCountryName.replace(/ /g, '-');
 
-                    taxGuideURL = taxGuidePath + '---' + thisCountryName;
+                    taxGuideURL = taxGuidePath + '---' + thisCountryNameDash;
 
                     $('#country-dataselector').val(thisOption);
 
@@ -232,7 +233,7 @@ $(document).ready(function() {
 
             loadHTMLFragment(taxGuideURL, 'maincontent', thisOperatingModel);
 
-            loadTaxAlerts('S03', thisOption, 4);
+            loadTaxAlerts('S03', thisCountryName, 4);
 
         }
 
