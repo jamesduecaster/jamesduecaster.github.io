@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 2:53 PM - JD
+ * last update: 21 Sep 2016 3:15 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -264,9 +264,7 @@ $(document).ready(function() {
 
     $('<div class="retrieving-contents"><img src="/Media/vwLUExtFile/jquery/$FILE/ajax-loader.gif"> Getting content...</div>').appendTo('body');
 
-    //taxGuideOperatingModel = $('[data-operating-model-title]').attr('data-operating-model-title');
-
-    //thisOperatingModel = $('#model-dataselector').val();
+    renderGenericModal();
 
     getCountryList();
 
@@ -368,5 +366,18 @@ $(document).ready(function() {
     });
 
     $(window).hashchange();
+
+});
+
+$(window).load(function(){
+
+$('#at-a-glance-links').html('<ul>' +
+'<li>' +
+'<a class="generic-modal-link" onclick="displayModal(\'wctg-at-a-glance\')">Corporate Tax</a>' +
+'</li>' +
+'<li>' +
+'<a class="generic-modal-link" onclick="displayModal(\'vat-at-a-glance\')">VAT, GST and Sales Tax</a>' +
+'</li>' +
+'</ul>');
 
 });
