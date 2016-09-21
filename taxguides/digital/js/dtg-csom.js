@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 3:51 PM - JD
+ * last update: 21 Sep 2016 4:00 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -162,11 +162,11 @@ function loadTaxBasics() {
 
           var transformedHtmlWCTG = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
 
-          $('.fig-caption .at-a-glance-note, .fig-caption .at-a-glance-break, .fig-caption .footnote').remove();
+          $('.fig-caption .wctg-at-a-glance-note, .fig-caption .wctg-at-a-glance-break, .fig-caption .wctg-at-a-glance-footnote').remove();
 
           $('#wctg-at-a-glance').html(transformedHtmlWCTG)
-              .before('<h4 class="at-a-glance-note">Worldwide Corporate Tax Guide*</h4>')
-              .after('<hr class="at-a-glance-break" /><p class="footnote">*Footnotes shown above refer to this country\'s/region\'s <a href="' + taxGuidePathWCTG + '">Worldwide Corporate Tax Guide</a> page.</p><hr />');
+              .before('<h4 class="wctg-at-a-glance-note">Worldwide Corporate Tax Guide*</h4>')
+              .after('<hr class="wctg-at-a-glance-break" /><p class="footnote wctg-at-a-glance-footnote">*Footnotes shown above refer to this country\'s/region\'s <a href="' + taxGuidePathWCTG + '">Worldwide Corporate Tax Guide</a> page.</p><hr />');
 
           $('#wctg-at-a-glance a[href^="#section-"]').each(function() {
               $(this).attr('href', taxGuidePathWCTG + $(this).attr('href'));
@@ -189,11 +189,11 @@ function loadTaxBasics() {
 
           var transformedHtmlVAT = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
 
-          $('.fig-caption .at-a-glance-note, .fig-caption .at-a-glance-break, .fig-caption .footnote').remove();
+          $('.fig-caption .vat-at-a-glance-note, .fig-caption .vat-at-a-glance-break, .fig-caption .vat-at-a-glance-footnote').remove();
 
           $('#vat-at-a-glance').html(transformedHtmlVAT)
-              .before('<h4 class="at-a-glance-note">VAT, GST and Sales Tax Guide**</h4>')
-              .after('<hr class="at-a-glance-break" /><p class="footnote">**<a href="' + taxGuidePathVAT + '">See the Worldwide VAT, GST and Sales Tax Guide (' + taxGuideYearVAT + ')</a> for additional information on indirect taxation.</p>');
+              .before('<h4 class="vat-at-a-glance-note">VAT, GST and Sales Tax Guide**</h4>')
+              .after('<hr class="vat-at-a-glance-break" /><p class="footnote vat-at-a-glance-footnote">**<a href="' + taxGuidePathVAT + '">See the Worldwide VAT, GST and Sales Tax Guide (' + taxGuideYearVAT + ')</a> for additional information on indirect taxation.</p>');
 
           $('#vat-at-a-glance a[href^="#section-"]').each(function() {
               $(this).attr('href', taxGuidePathVAT + $(this).attr('href'));
