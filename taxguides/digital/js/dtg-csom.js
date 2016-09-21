@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 4:00 PM - JD
+ * last update: 21 Sep 2016 4:08 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -166,7 +166,7 @@ function loadTaxBasics() {
 
           $('#wctg-at-a-glance').html(transformedHtmlWCTG)
               .before('<h4 class="wctg-at-a-glance-note">Worldwide Corporate Tax Guide*</h4>')
-              .after('<hr class="wctg-at-a-glance-break" /><p class="footnote wctg-at-a-glance-footnote">*Footnotes shown above refer to this country\'s/region\'s <a href="' + taxGuidePathWCTG + '">Worldwide Corporate Tax Guide</a> page.</p><hr />');
+              .after('<hr class="wctg-at-a-glance-break" /><p class="footnote wctg-at-a-glance-footnote">*Footnotes shown above refer to this country\'s/region\'s <a href="' + taxGuidePathWCTG + '">Worldwide Corporate Tax Guide</a> page.</p>');
 
           $('#wctg-at-a-glance a[href^="#section-"]').each(function() {
               $(this).attr('href', taxGuidePathWCTG + $(this).attr('href'));
