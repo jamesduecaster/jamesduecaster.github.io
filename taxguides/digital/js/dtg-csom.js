@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 11:52 AM - JD
+ * last update: 21 Sep 2016 12:53 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -143,6 +143,64 @@ var thisCountryName;
 var thisOperatingModelVal;
 var thisOperatingModelHTML;
 
+
+function loadTaxBasics() {
+
+  $.ajax({
+      url: '/ecimages/taxguides/WCTG-' + taxGuideYearWCTG + '/WCTG-' + $('#countryISO').html() + '.xml',
+      type: 'GET',
+      error: function() {
+          //file does not exist
+      },
+      success: function() {
+          var taxGuideCountryISOCC = $('#countryISO').html();
+          var taxGuidePathWCTG = '/GL/en/Services/Tax/Worldwide-Corporate-Tax-Guide---XMLQS?preview&XmlUrl=/ec1mages/taxguides/WCTG-' + taxGuideYearWCTG + '/WCTG-' + taxGuideCountryISOCC + '.xml';
+
+
+          processXML('/ecimages/taxguides/WCTG-' + taxGuideYearWCTG + '/WCTG-' + taxGuideCountryISOCC + '.xml');
+          // for test // processXML('/Media/vwLUExtFile/Worldwide_Corporate_Tax_Guide/$FILE/wctg-ie.xml');
+
+          var transformedHtmlWCTG = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
+
+          $('#wctg-at-a-glance').html(transformedHtmlWCTG)
+              .before('<h4>Worldwide Corporate Tax Guide*</h4>')
+              .after('<hr /><p class="footnote">*Footnotes shown above refer to this country\'s/region\'s <a href="' + taxGuidePathWCTG + '">Worldwide Corporate Tax Guide</a> page.</p><hr />');
+
+          $('#wctg-at-a-glance a[href^="#section-"]').each(function() {
+              $(this).attr('href', taxGuidePathWCTG + $(this).attr('href'));
+              $(this).append(' of the Worldwide Corporate Tax Guide');
+          });
+      }
+  });
+
+  $.ajax({
+      url: '/ecimages/taxguides/VAT-' + taxGuideYearVAT + '/VAT-' + $('#countryISO').html() + '.xml',
+      type: 'GET',
+      error: function() {
+          //file does not exist
+      },
+      success: function() {
+          var taxGuideCountryISOCC = $('#countryISO').html();
+          var taxGuidePathVAT = '/GL/en/Services/Tax/Worldwide-VAT--GST-and-Sales-Tax-Guide---XMLQS?preview&XmlUrl=/ec1mages/taxguides/VAT-' + taxGuideYearVAT + '/VAT-' + taxGuideCountryISOCC + '.xml';
+
+          processXML('/ecimages/taxguides/VAT-' + taxGuideYearVAT + '/VAT-' + taxGuideCountryISOCC + '.xml');
+
+          var transformedHtmlVAT = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
+
+          $('#vat-at-a-glance').html(transformedHtmlVAT)
+              .before('<h4>VAT, GST and Sales Tax Guide**</h4>')
+              .after('<hr /><p class="footnote">**<a href="' + taxGuidePathVAT + '">See the Worldwide VAT, GST and Sales Tax Guide (' + taxGuideYearVAT + ')</a> for additional information on indirect taxation.</p>');
+
+          $('#vat-at-a-glance a[href^="#section-"]').each(function() {
+              $(this).attr('href', taxGuidePathVAT + $(this).attr('href'));
+              $(this).append(' of the Worldwide VAT, GST and Sales Tax Guide');
+          });
+      }
+  });
+
+}
+
+
 $(document).ready(function() {
 
     $('.cookienotification').remove();
@@ -246,64 +304,12 @@ $(document).ready(function() {
             loadHTMLFragment(taxGuideURLWCC, 'maincontent', thisOperatingModelVal);
             loadTaxAlerts('S03', thisCountryISO, 4);
             loadRelatedContent(thisCountryISO);
+            loadTaxBasics();
 
         }
 
     });
 
     $(window).hashchange();
-
-    $.ajax({
-        url: '/ecimages/taxguides/WCTG-' + taxGuideYearWCTG + '/WCTG-' + $('#countryISO').html() + '.xml',
-        type: 'GET',
-        error: function() {
-            //file does not exist
-        },
-        success: function() {
-            var taxGuideCountryISOCC = $('#countryISO').html();
-            var taxGuidePathWCTG = '/GL/en/Services/Tax/Worldwide-Corporate-Tax-Guide---XMLQS?preview&XmlUrl=/ec1mages/taxguides/WCTG-' + taxGuideYearWCTG + '/WCTG-' + taxGuideCountryISOCC + '.xml';
-
-
-            processXML('/ecimages/taxguides/WCTG-' + taxGuideYearWCTG + '/WCTG-' + taxGuideCountryISOCC + '.xml');
-            // for test // processXML('/Media/vwLUExtFile/Worldwide_Corporate_Tax_Guide/$FILE/wctg-ie.xml');
-
-            var transformedHtmlWCTG = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
-
-            $('#wctg-at-a-glance').html(transformedHtmlWCTG)
-                .before('<h4>Worldwide Corporate Tax Guide*</h4>')
-                .after('<hr /><p class="footnote">*Footnotes shown above refer to this country\'s/region\'s <a href="' + taxGuidePathWCTG + '">Worldwide Corporate Tax Guide</a> page.</p><hr />');
-
-            $('#wctg-at-a-glance a[href^="#section-"]').each(function() {
-                $(this).attr('href', taxGuidePathWCTG + $(this).attr('href'));
-                $(this).append(' of the Worldwide Corporate Tax Guide');
-            });
-        }
-    });
-
-    $.ajax({
-        url: '/ecimages/taxguides/VAT-' + taxGuideYearVAT + '/VAT-' + $('#countryISO').html() + '.xml',
-        type: 'GET',
-        error: function() {
-            //file does not exist
-        },
-        success: function() {
-            var taxGuideCountryISOCC = $('#countryISO').html();
-            var taxGuidePathVAT = '/GL/en/Services/Tax/Worldwide-VAT--GST-and-Sales-Tax-Guide---XMLQS?preview&XmlUrl=/ec1mages/taxguides/VAT-' + taxGuideYearVAT + '/VAT-' + taxGuideCountryISOCC + '.xml';
-
-            processXML('/ecimages/taxguides/VAT-' + taxGuideYearVAT + '/VAT-' + taxGuideCountryISOCC + '.xml');
-
-            var transformedHtmlVAT = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
-
-            $('#vat-at-a-glance').html(transformedHtmlVAT)
-                .before('<h4>VAT, GST and Sales Tax Guide**</h4>')
-                .after('<hr /><p class="footnote">**<a href="' + taxGuidePathVAT + '">See the Worldwide VAT, GST and Sales Tax Guide (' + taxGuideYearVAT + ')</a> for additional information on indirect taxation.</p>');
-
-            $('#vat-at-a-glance a[href^="#section-"]').each(function() {
-                $(this).attr('href', taxGuidePathVAT + $(this).attr('href'));
-                $(this).append(' of the Worldwide VAT, GST and Sales Tax Guide');
-            });
-        }
-    });
-
 
 });
