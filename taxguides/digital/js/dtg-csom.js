@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 12:53 PM - JD
+ * last update: 21 Sep 2016 12:58 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -162,6 +162,7 @@ function loadTaxBasics() {
 
           var transformedHtmlWCTG = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
 
+          $('#wctg-at-a-glance').html('');
           $('#wctg-at-a-glance').html(transformedHtmlWCTG)
               .before('<h4>Worldwide Corporate Tax Guide*</h4>')
               .after('<hr /><p class="footnote">*Footnotes shown above refer to this country\'s/region\'s <a href="' + taxGuidePathWCTG + '">Worldwide Corporate Tax Guide</a> page.</p><hr />');
@@ -187,6 +188,7 @@ function loadTaxBasics() {
 
           var transformedHtmlVAT = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
 
+          $('#vat-at-a-glance').html('');
           $('#vat-at-a-glance').html(transformedHtmlVAT)
               .before('<h4>VAT, GST and Sales Tax Guide**</h4>')
               .after('<hr /><p class="footnote">**<a href="' + taxGuidePathVAT + '">See the Worldwide VAT, GST and Sales Tax Guide (' + taxGuideYearVAT + ')</a> for additional information on indirect taxation.</p>');
