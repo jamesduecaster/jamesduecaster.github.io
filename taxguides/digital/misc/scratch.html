@@ -1,0 +1,13 @@
+
+
+
+<script>
+thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
+thisCountryName = thisCountryName.replace(/ /g, '-');
+
+taxGuideURL = taxGuidePath + '---' + thisCountryName;
+
+$('.retrieving-contents').show();
+
+loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
+</script>

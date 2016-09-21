@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 20 Sep 2016 5:23 PM - JD
+ * last update: 20 Sep 2016 11:32 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -14,62 +14,62 @@ var taxGuideURL = '';
 
 function getCountryList() {
 
-  $.ajax({
-      url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions.xml',
-      type: 'GET',
-      dataType: 'xml',
-      async: false
-  }).done(function(data) {
+    $.ajax({
+        url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions.xml',
+        type: 'GET',
+        dataType: 'xml',
+        async: false
+    }).done(function(data) {
 
-            var gdpgTitle = "Worldwide Cloud Computing Tax Guide";
-            var taxGuideTitle;
-      			$(data).find('destination').each(function() {
+        var gdpgTitle = "Worldwide Cloud Computing Tax Guide";
+        var taxGuideTitle;
+        $(data).find('destination').each(function() {
 
-              taxGuideTitle = $(this).find('title').text();
+            taxGuideTitle = $(this).find('title').text();
 
-              if( gdpgTitle === taxGuideTitle ) {
+            if (gdpgTitle === taxGuideTitle) {
 
                 var versionCount = 0;
 
-      					$(this).find('version').each(function() {
+                $(this).find('version').each(function() {
 
-      						if(versionCount === 1) {
-      							return;
-      						}
-
-                  versionCount++;
-                  var output, countryName, countryISO, tempStyle;
-
-                  $(this).find('country').each(function() {
-
-                    countryName = $(this).text();
-                    countryISO = $(this).attr('iso');
-
-                    if(countryISO === 'XX' || countryISO === 'XY'){
-                      tempStyle = ' class="active"';
-                    } else {
-                      tempStyle = '';
+                    if (versionCount === 1) {
+                        return;
                     }
 
-                    if(output === undefined) {
-                      output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
-                    } else {
-                      output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
-                    }
+                    versionCount++;
+                    var output, countryName, countryISO, tempStyle;
 
-                  });
+                    $(this).find('country').each(function() {
 
-                  $('#country-dataselector').html(output);
+                        countryName = $(this).text();
+                        countryISO = $(this).attr('iso');
+
+                        if (countryISO === 'XX' || countryISO === 'XY') {
+                            tempStyle = ' class="active"';
+                        } else {
+                            tempStyle = '';
+                        }
+
+                        if (output === undefined) {
+                            output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
+                        } else {
+                            output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
+                        }
+
+                    });
+
+                    $('#country-dataselector').html(output);
 
                 });
 
-              }
+            }
 
-            });
+        });
 
-  }).fail(function(jqXHR, textStatus, errorThrown) {
-      //console.log("GET error: jq:" + jqXHR +' - ts:' + textStatus + ' - et: ' + errorThrown);
-  });
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        //console.log("GET error: jq:" + jqXHR +' - ts:' + textStatus + ' - et: ' + errorThrown);
+    });
 
 }
 
@@ -98,10 +98,10 @@ function loadHTMLFragment(url, fragment, fragmentSection) {
 
         $('.accordion').accordion('destroy');
         $('.accordion').accordion({
-          collapsible: true,
-          active: false,
-          autoHeight: false,
-          fillSpace: false
+            collapsible: true,
+            active: false,
+            autoHeight: false,
+            fillSpace: false
         });
 
         $('.dtg-contacts').html(contactsContents);
@@ -136,6 +136,7 @@ function onScrollInit(items, trigger) {
 }
 
 var thisCountryISO;
+var thisOperatingModel;
 
 $(document).ready(function() {
 
@@ -143,28 +144,23 @@ $(document).ready(function() {
 
     $('<div class="retrieving-contents"><img src="/Media/vwLUExtFile/jquery/$FILE/ajax-loader.gif"> Getting content...</div>').appendTo('body');
 
-    taxGuideOperatingModel = $('[data-operating-model-title]').attr('data-operating-model-title');
+    //taxGuideOperatingModel = $('[data-operating-model-title]').attr('data-operating-model-title');
+
+    //thisOperatingModel = $('#model-dataselector').val();
 
     getCountryList();
 
     $('#model-dataselector').on('change', function() {
+
+        thisOperatingModel = $('#model-dataselector').val();
+        location.hash = '#' + thisCountryISO + '-' + thisOperatingModel;
 
     });
 
     $('#country-dataselector').on('change', function() {
 
         thisCountryISO = $('#country-dataselector').val();
-
-        location.hash = '#' + thisCountryISO;
-
-        // thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
-        // thisCountryName = thisCountryName.replace(/ /g, '-');
-        //
-        // taxGuideURL = taxGuidePath + '---' + thisCountryName;
-        //
-        // $('.retrieving-contents').show();
-        //
-        // loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
+        location.hash = '#' + thisCountryISO + '-' + thisOperatingModel;
 
     });
 
@@ -173,50 +169,72 @@ $(document).ready(function() {
 
     $(window).hashchange(function() {
 
-      var currentHash = location.hash.substring(1, location.hash.length);
+        var currentHash = location.hash.substring(1, location.hash.length);
 
-      if (currentHash === '') {
+        if (currentHash === '') {
 
-        thisCountryISO = $('#country-dataselector option:selected').val();
-        thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
-        $('#countryName').html(thisCountryName);
-
-        thisCountryName = thisCountryName.replace(/ /g, '-');
-        taxGuideURL = taxGuidePath + '---' + thisCountryName;
-
-        $('.retrieving-contents').show();
-
-        loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
-
-        loadTaxAlerts('SO3', thisCountryISO, 4);
-
-      } else {
-
-        $('#country-dataselector option').each(function(){
-
-          var thisOption = $(this).val();
-
-          if(thisOption === currentHash.toUpperCase()) {
-
-            thisCountryName = $(this).html();
+            thisCountryISO = $('#country-dataselector option:selected').val();
+            thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
             $('#countryName').html(thisCountryName);
 
             thisCountryName = thisCountryName.replace(/ /g, '-');
-
             taxGuideURL = taxGuidePath + '---' + thisCountryName;
 
-            $('#country-dataselector').val(thisOption);
+            thisOperatingModel = $('#model-dataselector option:selected').val();
 
             $('.retrieving-contents').show();
-            loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
+
+            loadHTMLFragment(taxGuideURL, 'maincontent', thisOperatingModel);
+
+            loadTaxAlerts('SO3', thisCountryISO, 4);
+
+        } else {
+
+            $('#country-dataselector option').each(function() {
+
+                var thisOption = $(this).val();
+
+                var countryHash = currentHash.substring(0, currentHash.indexOf('-'));
+
+                if (thisOption === countryHash.toUpperCase()) {
+
+                    thisCountryName = $(this).html();
+                    $('#countryName').html(thisCountryName);
+
+                    thisCountryName = thisCountryName.replace(/ /g, '-');
+
+                    taxGuideURL = taxGuidePath + '---' + thisCountryName;
+
+                    $('#country-dataselector').val(thisOption);
+
+                }
+
+            });
+
+
+            $('#country-dataselector option').each(function() {
+
+                var thisOption = $(this).html();
+                var modelHash = unescape(currentHash.substring(currentHash.indexOf('-') + 1, currentHash.length));
+
+                if (thisOption === modelHash) {
+
+                    thisOperatingModel = $(this).val();
+
+                }
+
+            });
+
+            $('.retrieving-contents').show();
+
+            console.log(taxGuideURL);
+            console.log(thisOperatingModel);
+
+            loadHTMLFragment(taxGuideURL, 'maincontent', thisOperatingModel);
 
             loadTaxAlerts('S03', thisOption, 4);
 
-          }
-
-        });
-
-      }
+        }
 
     });
 
