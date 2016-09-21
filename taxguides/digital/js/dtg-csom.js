@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 10:44 AM - JD
+ * last update: 21 Sep 2016 11:52 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -24,13 +24,13 @@ function getCountryList() {
         async: false
     }).done(function(data) {
 
-        var gdpgTitle = "Worldwide Cloud Computing Tax Guide";
+        var taxGuideTitleWCC = "Worldwide Cloud Computing Tax Guide";
         var taxGuideTitle;
         $(data).find('destination').each(function() {
 
             taxGuideTitle = $(this).find('title').text();
 
-            if (gdpgTitle === taxGuideTitle) {
+            if (taxGuideTitleWCC === taxGuideTitle) {
 
                 var versionCount = 0;
 
