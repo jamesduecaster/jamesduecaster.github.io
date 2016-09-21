@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 12:10 AM - JD
+ * last update: 21 Sep 2016 12:35 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -137,7 +137,8 @@ function onScrollInit(items, trigger) {
 
 var thisCountryISO;
 var thisCountryName;
-var thisOperatingModel;
+var thisOperatingModelVal;
+var thisOperatingModelHTML;
 
 $(document).ready(function() {
 
@@ -153,15 +154,19 @@ $(document).ready(function() {
 
     $('#model-dataselector').on('change', function() {
 
-        thisOperatingModel = $('#model-dataselector').val();
-        location.hash = '#' + thisCountryISO + '-' + thisOperatingModel;
+        thisCountryISO = $('#country-dataselector').val();
+        thisOperatingModelVal = $('#model-dataselector').val();
+        thisOperatingModelHTML = $('#model-dataselector option[value="' + thisOperatingModelVal + '"]').html();
+        location.hash = '#' + thisCountryISO + '-' + thisOperatingModelHTML;
 
     });
 
     $('#country-dataselector').on('change', function() {
 
         thisCountryISO = $('#country-dataselector').val();
-        location.hash = '#' + thisCountryISO + '-' + thisOperatingModel;
+        thisOperatingModelVal = $('#model-dataselector').val();
+        thisOperatingModelHTML = $('#model-dataselector option[value="' + thisOperatingModelVal + '"]').html();
+        location.hash = '#' + thisCountryISO + '-' + thisOperatingModelHTML;
 
     });
 
@@ -181,11 +186,11 @@ $(document).ready(function() {
             var thisCountryNameDash = thisCountryName.replace(/ /g, '-');
             taxGuideURL = taxGuidePath + '---' + thisCountryNameDash;
 
-            thisOperatingModel = $('#model-dataselector option:selected').val();
+            thisOperatingModelVal = $('#model-dataselector option:selected').val();
 
             $('.retrieving-contents').show();
 
-            loadHTMLFragment(taxGuideURL, 'maincontent', thisOperatingModel);
+            loadHTMLFragment(taxGuideURL, 'maincontent', thisOperatingModelVal);
 
             loadTaxAlerts('SO3', thisCountryISO, 4);
 
@@ -199,6 +204,7 @@ $(document).ready(function() {
 
                 if (thisOption === countryHash.toUpperCase()) {
 
+                    thisCountryISO = $(this).val();
                     thisCountryName = $(this).html();
                     $('#countryName').html(thisCountryName);
 
@@ -212,7 +218,6 @@ $(document).ready(function() {
 
             });
 
-
             $('#model-dataselector option').each(function() {
 
                 var thisOption = $(this).html();
@@ -220,7 +225,7 @@ $(document).ready(function() {
 
                 if (thisOption === modelHash) {
 
-                    thisOperatingModel = $(this).val();
+                    thisOperatingModelVal = $(this).val();
 
                 }
 
@@ -229,9 +234,9 @@ $(document).ready(function() {
             $('.retrieving-contents').show();
 
             console.log(taxGuideURL);
-            console.log(thisOperatingModel);
+            console.log(thisOperatingModelVal);
 
-            loadHTMLFragment(taxGuideURL, 'maincontent', thisOperatingModel);
+            loadHTMLFragment(taxGuideURL, 'maincontent', thisOperatingModelVal);
 
             loadTaxAlerts('S03', thisCountryName, 4);
 
