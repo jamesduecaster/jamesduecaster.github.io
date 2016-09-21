@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 21 Sep 2016 1:07 PM - JD
+ * last update: 21 Sep 2016 2:53 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -201,6 +201,59 @@ function loadTaxBasics() {
           });
       }
   });
+
+}
+
+function displayModal(modalName) {
+
+    $('#generic-modal-trigger').click();
+
+    $('.generic-modal-content').html('');
+    var thisHTML = $('#' + modalName).clone();
+
+    var thisTitle;
+    if ($('#' + modalName).prop('tagName').toLowerCase() === 'span') {
+        thisTitle = $('#' + modalName).attr('data-title');
+    } else {
+        thisTitle = $('#' + modalName).parent().prev().children('h3').html();
+    }
+
+    $('<h3>' + thisTitle + '</h3>').appendTo('.generic-modal-content');
+    $(thisHTML).appendTo('.generic-modal-content');
+    $('.generic-modal-content span').show();
+
+}
+
+function renderGenericModal() {
+
+    $('<div class="modal generic-modal">' +
+        '<label for="generic-modal">' +
+        '<div id="generic-modal-trigger" class="modal-trigger" style="display: none">Click for Modal</div>' +
+        '</label>' +
+        '<input class="modal-state" id="generic-modal" type="checkbox" />' +
+        '<div class="modal-fade-screen">' +
+        '<div class="modal-inner">' +
+        '<div class="modal-close" for="generic-modal"></div>' +
+        '<div class="modal-content generic-modal-content generic-modal-content"></div>' +
+        '</div>' +
+        '</div>' +
+        '</div>').appendTo('body');
+
+    $('#generic-modal').on("change", function() {
+        if ($(this).is(":checked")) {
+            $("body").addClass("modal-open");
+        } else {
+            $("body").removeClass("modal-open");
+        }
+    });
+
+    $(".generic-modal .modal-fade-screen, .generic-modal .modal-close").on("click", function() {
+        $(".modal-state:checked").prop("checked", false).change();
+    });
+
+    $(".modal-inner").on("click", function(e) {
+        e.stopPropagation();
+    });
 
 }
 
