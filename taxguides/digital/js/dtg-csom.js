@@ -1,6 +1,6 @@
 /**
- * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 22 Sep 2016 9:21 AM - JD
+ * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
+ * last update: 22 Sep 2016 10:28 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -358,7 +358,7 @@ $(document).ready(function() {
 
         }
 
-        $('#taxalerts_container ul, #rccontainer ul').addClass('default-ul');
+        $('#rccontainer ul').addClass('default-ul');
 
     });
 
