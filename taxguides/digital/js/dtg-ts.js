@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 23 Sep 2016 2:33 PM - JD
+ * last update: 23 Sep 2016 6:12 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -83,19 +83,19 @@ function getCountryData(countryISO) {
 function getCountryList() {
 
   $.ajax({
-      url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions.xml',
+      url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions_test.xml',
       type: 'GET',
       dataType: 'xml',
       async: false
   }).done(function(data) {
 
-            var gdpgTitle = "Worldwide Estate and Inheritance Tax Guide";
+            var taxGuideTitleDTG = "Digital Tax Guide";
             var taxGuideTitle;
       			$(data).find('destination').each(function() {
 
               taxGuideTitle = $(this).find('title').text();
 
-              if( gdpgTitle === taxGuideTitle ) {
+              if( taxGuideTitleDTG === taxGuideTitle ) {
 
                 var versionCount = 0;
 
