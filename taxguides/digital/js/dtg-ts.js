@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 23 Sep 2016 6:12 PM - JD
+ * last update: 23 Sep 2016 6:34 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -113,7 +113,7 @@ function getCountryList() {
                     countryName = $(this).text();
                     countryISO = $(this).attr('iso');
 
-                    if(countryISO === 'AU' || countryISO === 'BR' || countryISO === 'CA' || countryISO === 'FR' || countryISO === 'IE' || countryISO === 'NZ' || countryISO === 'US'){
+                    if(countryISO === 'XX' || countryISO === 'XY'){
                       tempStyle = ' class="active"';
                     } else {
                       tempStyle = '';
