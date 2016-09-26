@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 26 Sep 2016 4:45 PM - JD
+ * last update: 26 Sep 2016 4:54 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -45,46 +45,46 @@ dtg.getCountryData = function(countryISO) {
         $('#scenario-a4').html(thisScenarioData.a4);
 
         var thisContactData;
-        if(thisScenarioData.contacts !== undefined) {
-          thisContactData = thisScenarioData.contacts;
+        if (thisScenarioData.contacts !== undefined) {
+            thisContactData = thisScenarioData.contacts;
         } else {
-          thisContactData = myData.contacts;
+            thisContactData = myData.contacts;
         }
 
         $('.dtg-contact').remove();
 
         for (var i = 0; i < thisContactData.length; i++) {
 
-          var email = thisContactData[i]['email'];
-          var firstName = thisContactData[i]['firstname'];
-          var lastName = thisContactData[i]['lastname'];
-          var phone = thisContactData[i]['phone'];
-          var photo = thisContactData[i]['photo'];
-          var photoHTML = '<img src="' + photo + '"/>';
-          var title = thisContactData[i]['title'];
+            var email = thisContactData[i]['email'];
+            var firstName = thisContactData[i]['firstname'];
+            var lastName = thisContactData[i]['lastname'];
+            var phone = thisContactData[i]['phone'];
+            var photo = thisContactData[i]['photo'];
+            var photoHTML = '<img src="' + photo + '"/>';
+            var title = thisContactData[i]['title'];
 
 
-          $('<div class="dtg-contact">' +
-            '<div class="contact-photo">' + photoHTML + '</div>' +
-            '<div class="contact-name"><strong>' + firstName + ' ' + lastName + '</strong></div>' +
-            '<div class="contact-title">' + title + '</div>' +
-            '<div class="contact-phone">' + phone + '</div>' +
-            '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' +
-          '</div>').appendTo('.dtg-contacts');
+            $('<div class="dtg-contact">' +
+                '<div class="contact-photo">' + photoHTML + '</div>' +
+                '<div class="contact-name"><strong>' + firstName + ' ' + lastName + '</strong></div>' +
+                '<div class="contact-title">' + title + '</div>' +
+                '<div class="contact-phone">' + phone + '</div>' +
+                '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' +
+                '</div>').appendTo('.dtg-contacts');
 
-          var scenarioKeys = '';
+            var scenarioKeys = '';
 
-          var allScenariosData = myData.scenarios;
-          for(var key in allScenariosData) {
-            //var value = allScenariosData[key];
-            if(scenarioKeys === '') {
-              scenarioKeys = key;
-            } else {
-              scenarioKeys += ',' + key;
+            var allScenariosData = myData.scenarios;
+            for (var key in allScenariosData) {
+                //var value = allScenariosData[key];
+                if (scenarioKeys === '') {
+                    scenarioKeys = key;
+                } else {
+                    scenarioKeys += ',' + key;
+                }
             }
-          }
 
-          dtg.setScenarioList(scenarioKeys);
+            dtg.setScenarioList(scenarioKeys);
 
         }
 
@@ -96,90 +96,93 @@ dtg.getCountryData = function(countryISO) {
 }
 
 
-dtg.setCountryList= function() {
+dtg.setCountryList = function() {
 
-  $.ajax({
-      url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions_test.xml',
-      type: 'GET',
-      dataType: 'xml',
-      async: false
-  }).done(function(data) {
+    $.ajax({
+        url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions_test.xml',
+        type: 'GET',
+        dataType: 'xml',
+        async: false
+    }).done(function(data) {
 
-            var taxGuideTitleDTG = "Digital Tax Guide";
-            var taxGuideTitle;
+        var taxGuideTitleDTG = "Digital Tax Guide";
+        var taxGuideTitle;
 
-      			$(data).find('destination').each(function() {
+        $(data).find('destination').each(function() {
 
-              taxGuideTitle = $(this).find('title').text();
+            taxGuideTitle = $(this).find('title').text();
 
-              if( taxGuideTitleDTG === taxGuideTitle ) {
+            if (taxGuideTitleDTG === taxGuideTitle) {
 
                 var versionCount = 0;
 
-      					$(this).find('version').each(function() {
+                $(this).find('version').each(function() {
 
-      						if(versionCount === 1) {
-      							return;
-      						}
-
-                  versionCount++;
-                  var output, countryName, countryISO, tempStyle;
-
-                  $(this).find('country').each(function() {
-
-                    countryName = $(this).text();
-                    countryISO = $(this).attr('iso');
-
-                    if(countryISO === 'XX' || countryISO === 'XY'){
-                      tempStyle = ' class="active"';
-                    } else {
-                      tempStyle = '';
+                    if (versionCount === 1) {
+                        return;
                     }
 
-                    if(output === undefined) {
-                      output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
-                    } else {
-                      output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
-                    }
+                    versionCount++;
+                    var output, countryName, countryISO, tempStyle;
 
-                  });
+                    $(this).find('country').each(function() {
 
-                  $('#country-dataselector').html(output);
+                        countryName = $(this).text();
+                        countryISO = $(this).attr('iso');
+
+                        if (countryISO === 'XX' || countryISO === 'XY') {
+                            tempStyle = ' class="active"';
+                        } else {
+                            tempStyle = '';
+                        }
+
+                        if (output === undefined) {
+                            output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
+                        } else {
+                            output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
+                        }
+
+                    });
+
+                    $('#country-dataselector').html(output);
 
                 });
 
-              }
+            }
 
-            });
+        });
 
-  }).fail(function(jqXHR, textStatus, errorThrown) {
-      //console.log("GET error: jq:" + jqXHR +' - ts:' + textStatus + ' - et: ' + errorThrown);
-  });
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        //console.log("GET error: jq:" + jqXHR +' - ts:' + textStatus + ' - et: ' + errorThrown);
+    });
 
 }
 
 
 dtg.setScenarioList = function(scenarioKeys) {
 
-  var scenarioKeysArray = scenarioKeys.split(',');
-  var allScenariosData = dtg.control.scenarios[0];
+    var scenarioKeysArray = scenarioKeys.split(',');
+    var allScenariosData = dtg.control.scenarios[0];
 
-  for(var i=0; i < scenarioKeysArray.length; i++) {
+    if ($('#scenario-dataselector').html() === '') {
 
-    var scenarioKey = scenarioKeysArray[i];
+        for (var i = 0; i < scenarioKeysArray.length; i++) {
 
-    var thisTitle = eval('allScenariosData.' + scenarioKey + '.title');
-    var thisLink = eval('allScenariosData.' + scenarioKey + '.link');
+            var scenarioKey = scenarioKeysArray[i];
 
-    $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
+            var thisTitle = eval('allScenariosData.' + scenarioKey + '.title');
+            var thisLink = eval('allScenariosData.' + scenarioKey + '.link');
 
-  }
+            $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
 
-  $('#scenario-dataselector').change(function() {
-    if($(this).val() !== '') {
-      location.href= $(this).val();
+        }
+
+        $('#scenario-dataselector').change(function() {
+            if ($(this).val() !== '') {
+                location.href = $(this).val();
+            }
+        });
     }
-  });
 
 }
 
@@ -285,13 +288,13 @@ var thisCountryISO;
 
 $(document).ready(function() {
 
-  $('.eyhero').addClass('reduce-height');
+    $('.eyhero').addClass('reduce-height');
 
-  var pageHeadings = $('.maincolumn > h4, .maincolumn > h3');
+    var pageHeadings = $('.maincolumn > h4, .maincolumn > h3');
 
-  pageHeadings.appendTo('.article-hero-container');
+    pageHeadings.appendTo('.article-hero-container');
 
-  $('.article-hero-container h4').wrapInner('<a href="http://www.ey.com/gl/en/services/tax/ey-digital-tax-guide-dev"></a>');
+    $('.article-hero-container h4').wrapInner('<a href="http://www.ey.com/gl/en/services/tax/ey-digital-tax-guide-dev"></a>');
 
     $('.cookienotification').remove();
 
