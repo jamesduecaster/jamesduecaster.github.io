@@ -1,10 +1,5 @@
-/**
- * EY Digital Tax Guide - Control file - 2016 edition JavaScript
- * last update: 26 Sep 2016 12:23 PM - JD
- */
-
 dtg.control = {
-    "techscenarios": [{
+    "scenarios": [{
         "scenario1": {
             "title": "Digital advertising",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---digital-advertising"
