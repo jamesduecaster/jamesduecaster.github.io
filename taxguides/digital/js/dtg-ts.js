@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 23 Sep 2016 6:34 PM - JD
+ * last update: 26 Sep 2016 10:18 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -10,7 +10,9 @@ var isProduction = isLocal === false && isDropbox === false && isPreview === fal
 
 var myData;
 
-function getCountryData(countryISO) {
+var dtg = dtg || {};
+
+dtg.getCountryData = function(countryISO) {
 
     var thisCountryISO = countryISO.toLowerCase();
     var scenario = $('h2[data-scenario-title]').attr('data-scenario-title');
@@ -80,7 +82,8 @@ function getCountryData(countryISO) {
 
 }
 
-function getCountryList() {
+
+dtg.getCountryList= function() {
 
   $.ajax({
       url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions_test.xml',
@@ -91,6 +94,7 @@ function getCountryList() {
 
             var taxGuideTitleDTG = "Digital Tax Guide";
             var taxGuideTitle;
+            
       			$(data).find('destination').each(function() {
 
               taxGuideTitle = $(this).find('title').text();
@@ -141,7 +145,8 @@ function getCountryList() {
 
 }
 
-function onScrollInit(items, trigger) {
+
+dtg.onScrollInit = function(items, trigger) {
     items.each(function() {
         var osElement = $(this),
             osAnimationClass = osElement.attr('data-os-animation'),
@@ -167,13 +172,16 @@ var thisCountryISO;
 $(document).ready(function() {
 
   $('.eyhero').addClass('reduce-height');
+
   var pageHeadings = $('.maincolumn > h4, .maincolumn > h3');
+
   pageHeadings.appendTo('.article-hero-container');
+
   $('.article-hero-container h4').wrapInner('<a href="http://www.ey.com/gl/en/services/tax/ey-digital-tax-guide-dev"></a>');
 
     $('.cookienotification').remove();
 
-    getCountryList();
+    dtg.getCountryList();
 
     thisCountryISO = $('#country-dataselector option:selected').val();
     getCountryData(thisCountryISO);
@@ -198,7 +206,7 @@ $(document).ready(function() {
 
         thisCountryISO = $('#country-dataselector').val();
 
-        getCountryData(thisCountryISO);
+        dtg.getCountryData(thisCountryISO);
 
         thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
 
@@ -206,7 +214,7 @@ $(document).ready(function() {
 
     });
 
-    onScrollInit($('.os-animation'));
-    onScrollInit($('.staggered-animation'), $('.staggered-animation-container'));
+    dtg.onScrollInit($('.os-animation'));
+    dtg.onScrollInit($('.staggered-animation'), $('.staggered-animation-container'));
 
 });
