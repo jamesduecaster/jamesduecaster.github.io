@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 26 Sep 2016 4:54 PM - JD
+ * last update: 26 Sep 2016 5:29 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -176,6 +176,10 @@ dtg.setScenarioList = function(scenarioKeys) {
             $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
 
         }
+
+        var thisScenario = $('h2[data-scenario-title]').attr('data-scenario-title');
+        $('#scenario-dataselector option[data-scenario=' +thisScenario + ']').attr('selected', true);
+
 
         $('#scenario-dataselector').change(function() {
             if ($(this).val() !== '') {
