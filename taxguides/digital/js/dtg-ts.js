@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 26 Sep 2016 2:57 PM - JD
+ * last update: 26 Sep 2016 4:45 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -37,19 +37,6 @@ dtg.getCountryData = function(countryISO) {
     }).done(function(data) {
 
         myData = data;
-
-        var scenarioKeys = '';
-
-        var allScenariosData = myData.scenarios;
-        for(var key in allScenariosData) {
-          //var value = allScenariosData[key];
-          if(scenarioKeys === '') {
-            scenarioKeys = key;
-          } else {
-            scenarioKeys += ',' + key;
-          }
-        }
-
         var thisScenarioData = eval('myData.scenarios.' + scenario);
 
         $('#scenario-a1').html(thisScenarioData.a1);
@@ -85,6 +72,20 @@ dtg.getCountryData = function(countryISO) {
             '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' +
           '</div>').appendTo('.dtg-contacts');
 
+          var scenarioKeys = '';
+
+          var allScenariosData = myData.scenarios;
+          for(var key in allScenariosData) {
+            //var value = allScenariosData[key];
+            if(scenarioKeys === '') {
+              scenarioKeys = key;
+            } else {
+              scenarioKeys += ',' + key;
+            }
+          }
+
+          dtg.setScenarioList(scenarioKeys);
+
         }
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -95,7 +96,7 @@ dtg.getCountryData = function(countryISO) {
 }
 
 
-dtg.getCountryList= function() {
+dtg.setCountryList= function() {
 
   $.ajax({
       url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions_test.xml',
@@ -158,7 +159,27 @@ dtg.getCountryList= function() {
 }
 
 
-dtg.getScenariosList = function() {
+dtg.setScenarioList = function(scenarioKeys) {
+
+  var scenarioKeysArray = scenarioKeys.split(',');
+  var allScenariosData = dtg.control.scenarios[0];
+
+  for(var i=0; i < scenarioKeysArray.length; i++) {
+
+    var scenarioKey = scenarioKeysArray[i];
+
+    var thisTitle = eval('allScenariosData.' + scenarioKey + '.title');
+    var thisLink = eval('allScenariosData.' + scenarioKey + '.link');
+
+    $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
+
+  }
+
+  $('#scenario-dataselector').change(function() {
+    if($(this).val() !== '') {
+      location.href= $(this).val();
+    }
+  });
 
 }
 
@@ -274,7 +295,7 @@ $(document).ready(function() {
 
     $('.cookienotification').remove();
 
-    dtg.getCountryList();
+    dtg.setCountryList();
 
     thisCountryISO = $('#country-dataselector option:selected').val();
 
