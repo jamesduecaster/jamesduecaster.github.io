@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 27 Sep 2016 11:30 AM - JD
+ * last update: 27 Sep 2016 11:46 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -9,6 +9,7 @@ var isPreview = location.href.indexOf("eycompreview") >= 0;
 var isProduction = isLocal === false && isDropbox === false && isPreview === false;
 
 var thisCountryISO;
+var thisCountryName;
 
 var myData;
 
@@ -302,13 +303,10 @@ $(document).ready(function() {
 
     dtg.setCountryList();
 
-    thisCountryISO = $('#country-dataselector option:selected').val();
-
-    dtg.getCountryData(thisCountryISO);
-
-    thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
-
     var countryApreviousText = $('#countryA').text();
+
+    thisCountryISO = $('#country-dataselector option:selected').val();
+    thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
 
     $('.accordion div:nth-child(-n+4)').hover(function() {
 
@@ -327,9 +325,6 @@ $(document).ready(function() {
         $('.retrieving-contents').show();
 
         thisCountryISO = $('#country-dataselector').val();
-
-        dtg.getCountryData(thisCountryISO);
-
         thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
 
         $('#countryB').text(thisCountryName);
@@ -386,6 +381,8 @@ $(document).ready(function() {
             });
 
         }
+
+        dtg.getCountryData(thisCountryISO);
 
     });
 
