@@ -1,13 +1,16 @@
-
-
-
 <script>
-thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
-thisCountryName = thisCountryName.replace(/ /g, '-');
+    thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
+    thisCountryName = thisCountryName.replace(/ /g, '-');
 
-taxGuideURL = taxGuidePath + '---' + thisCountryName;
+    taxGuideURL = taxGuidePath + '---' + thisCountryName;
 
-$('.retrieving-contents').show();
+    $('.retrieving-contents').show();
 
-loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
+    loadHTMLFragment(taxGuideURL, 'maincontent', taxGuideOperatingModel);
+
+    //var jsonLocation = 'http://cdn.ey.com/echannel/gl/en/services/tax/ey-digital-tax-guide/data/' + thisCountryISO + '.js?jsoncallback=?'
+
+    // http://cdn.ey.com/echannel/gl/en/services/tax/ey-digital-tax-guide/data/
+    // https://dl.dropboxusercontent.com/u/767429/ey/taxguides/digital/data/
+    // /Media/vwLUExtFile/ey-digital-tax-guide-data/$FILE/
 </script>

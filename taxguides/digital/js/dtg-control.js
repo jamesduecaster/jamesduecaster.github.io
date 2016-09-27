@@ -13,8 +13,8 @@ dtg.control = {
             "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---streaming-media"
         },
         "scenario4": {
-            "title": "Ride sharing",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---ride-sharing"
+            "title": "Ridesharing",
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---ridesharing"
         },
         "scenario5": {
             "title": "Digital auto design",

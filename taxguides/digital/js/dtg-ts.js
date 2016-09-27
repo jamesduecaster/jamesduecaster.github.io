@@ -1,12 +1,14 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 26 Sep 2016 5:29 PM - JD
+ * last update: 27 Sep 2016 10:08 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
 var isDropbox = location.href.indexOf("dl.dropbox") >= 0;
 var isPreview = location.href.indexOf("eycompreview") >= 0;
 var isProduction = isLocal === false && isDropbox === false && isPreview === false;
+
+var thisCountryISO;
 
 var myData;
 
@@ -15,19 +17,14 @@ var dtg = dtg || {};
 dtg.getCountryData = function(countryISO) {
 
     var thisCountryISO = countryISO.toLowerCase();
-    var scenario = $('h2[data-scenario-title]').attr('data-scenario-title');
-
-    //var jsonLocation = 'http://cdn.ey.com/echannel/gl/en/services/tax/ey-digital-tax-guide/data/' + thisCountryISO + '.js?jsoncallback=?'
+    var scenario = $('#scenariotitle').html();
     var dataLocation;
+
     if (isDropbox) {
         dataLocation = 'https://dl.dropboxusercontent.com/u/767429/ey/taxguides/digital/data/';
     } else {
         dataLocation = '/Media/vwLUExtFile/ey-digital-tax-guide-data/$FILE/';
     }
-
-    // http://cdn.ey.com/echannel/gl/en/services/tax/ey-digital-tax-guide/data/
-    // https://dl.dropboxusercontent.com/u/767429/ey/taxguides/digital/data/
-    // /Media/vwLUExtFile/ey-digital-tax-guide-data/$FILE/
 
     $.ajax({
         url: dataLocation + thisCountryISO + '.js',
@@ -85,6 +82,8 @@ dtg.getCountryData = function(countryISO) {
             }
 
             dtg.setScenarioList(scenarioKeys);
+
+            $('.retrieving-contents').hide();
 
         }
 
@@ -173,12 +172,12 @@ dtg.setScenarioList = function(scenarioKeys) {
             var thisTitle = eval('allScenariosData.' + scenarioKey + '.title');
             var thisLink = eval('allScenariosData.' + scenarioKey + '.link');
 
-            $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
+            $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '#' + thisCountryISO + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
 
         }
 
-        var thisScenario = $('h2[data-scenario-title]').attr('data-scenario-title');
-        $('#scenario-dataselector option[data-scenario=' +thisScenario + ']').attr('selected', true);
+        var thisScenario = $('#scenariotitle').html();
+        $('#scenario-dataselector option[data-scenario=' + thisScenario + ']').attr('selected', true);
 
 
         $('#scenario-dataselector').change(function() {
@@ -189,6 +188,7 @@ dtg.setScenarioList = function(scenarioKeys) {
     }
 
 }
+
 
 dtg.onScrollInit = function(items, trigger) {
     items.each(function() {
@@ -211,6 +211,7 @@ dtg.onScrollInit = function(items, trigger) {
     });
 }
 
+
 dtg.control = {
     "scenarios": [{
         "scenario1": {
@@ -226,8 +227,8 @@ dtg.control = {
             "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---streaming-media"
         },
         "scenario4": {
-            "title": "Ride sharing",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---ride-sharing"
+            "title": "Ridesharing",
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---ridesharing"
         },
         "scenario5": {
             "title": "Digital auto design",
@@ -288,7 +289,6 @@ dtg.control = {
     }]
 }
 
-var thisCountryISO;
 
 $(document).ready(function() {
 
@@ -326,6 +326,8 @@ $(document).ready(function() {
 
     $('#country-dataselector').on('change', function() {
 
+        $('.retrieving-contents').show();
+
         thisCountryISO = $('#country-dataselector').val();
 
         dtg.getCountryData(thisCountryISO);
@@ -334,9 +336,61 @@ $(document).ready(function() {
 
         $('#countryB').text(thisCountryName);
 
+        location.hash = '#' + thisCountryISO;
+
     });
 
     dtg.onScrollInit($('.os-animation'));
     dtg.onScrollInit($('.staggered-animation'), $('.staggered-animation-container'));
+
+    $(window).hashchange(function() {
+
+        var currentHash = location.hash.substring(1, location.hash.length);
+
+        if (currentHash === '') {
+
+            thisCountryISO = $('#country-dataselector option:selected').val();
+            $('#countryISO').html(thisCountryISO);
+
+            thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
+            $('#countryName').html(thisCountryName);
+
+
+        } else {
+
+            $('#country-dataselector option').each(function() {
+
+                var thisOption = $(this).val();
+
+                var countryHash = currentHash;
+
+                if (thisOption === countryHash.toUpperCase()) {
+
+                    thisCountryISO = $(this).val();
+                    $('#countryISO').html(thisCountryISO);
+
+                    $('#scenario-dataselector option').each(function(){
+                      var thisVal = $(this).val();
+                      if(thisVal.indexOf('#')!== -1) {
+                        thisVal = thisVal.substring(0, thisVal.indexOf('#'))
+                      }
+                      $(this).val(thisVal + '#' + thisCountryISO);
+
+                    });
+
+                    thisCountryName = $(this).html();
+                    $('#countryName').html(thisCountryName);
+
+                    $('#country-dataselector').val(thisOption);
+
+                }
+
+            });
+
+        }
+
+    });
+
+    $(window).hashchange();
 
 });
