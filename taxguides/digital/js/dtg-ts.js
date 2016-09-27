@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 27 Sep 2016 11:46 AM - JD
+ * last update: 27 Sep 2016 12:01 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -164,29 +164,33 @@ dtg.setScenarioList = function(scenarioKeys) {
     var scenarioKeysArray = scenarioKeys.split(',');
     var allScenariosData = dtg.control.scenarios[0];
 
-    if ($('#scenario-dataselector').html() === '') {
+    $('#scenario-dataselector').html('')
 
-        for (var i = 0; i < scenarioKeysArray.length; i++) {
+    for (var i = 0; i < scenarioKeysArray.length; i++) {
 
-            var scenarioKey = scenarioKeysArray[i];
+        var scenarioKey = scenarioKeysArray[i];
 
-            var thisTitle = eval('allScenariosData.' + scenarioKey + '.title');
-            var thisLink = eval('allScenariosData.' + scenarioKey + '.link');
+        var thisTitle = eval('allScenariosData.' + scenarioKey + '.title');
+        var thisLink = eval('allScenariosData.' + scenarioKey + '.link');
+
+        if ($('option[data-scenario="' + scenarioKey + '"]').length === 0) {
 
             $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '#' + thisCountryISO + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
 
         }
 
-        var thisScenario = $('#scenarioid').html();
-        $('#scenario-dataselector option[data-scenario=' + thisScenario + ']').attr('selected', true);
-
-
-        $('#scenario-dataselector').change(function() {
-            if ($(this).val() !== '') {
-                location.href = $(this).val();
-            }
-        });
     }
+
+    var thisScenario = $('#scenarioid').html();
+    $('#scenario-dataselector option[data-scenario=' + thisScenario + ']').attr('selected', true);
+
+
+    $('#scenario-dataselector').change(function() {
+        if ($(this).val() !== '') {
+            location.href = $(this).val();
+        }
+    });
+
 
 }
 
@@ -362,18 +366,17 @@ $(document).ready(function() {
                     thisCountryISO = $(this).val();
                     $('#countryISO').html(thisCountryISO);
 
-                    $('#scenario-dataselector option').each(function(){
-                      var thisVal = $(this).val();
-                      if(thisVal.indexOf('#')!== -1) {
-                        thisVal = thisVal.substring(0, thisVal.indexOf('#'))
-                      }
-                      $(this).val(thisVal + '#' + thisCountryISO);
+                    $('#scenario-dataselector option').each(function() {
+                        var thisVal = $(this).val();
+                        if (thisVal.indexOf('#') !== -1) {
+                            thisVal = thisVal.substring(0, thisVal.indexOf('#'))
+                        }
+                        $(this).val(thisVal + '#' + thisCountryISO);
 
                     });
 
                     thisCountryName = $(this).html();
                     $('#countryName').html(thisCountryName);
-
                     $('#country-dataselector').val(thisOption);
 
                 }
