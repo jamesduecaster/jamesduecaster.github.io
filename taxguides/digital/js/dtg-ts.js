@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 27 Sep 2016 11:11 AM - JD
+ * last update: 27 Sep 2016 11:24 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -13,6 +13,8 @@ var thisCountryISO;
 var myData;
 
 var dtg = dtg || {};
+
+$.getScript('https://jamesduecaster.github.io/taxguides/digital/js/dtg-control.js');
 
 dtg.getCountryData = function(countryISO) {
 
