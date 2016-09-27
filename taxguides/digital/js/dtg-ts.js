@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 27 Sep 2016 1:51 PM - JD
+ * last update: 27 Sep 2016 4:35 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -221,43 +221,43 @@ dtg.control = {
     "scenarios": [{
         "scenario1": {
             "title": "Digital advertising",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---digital-advertising"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-advertising"
         },
         "scenario2": {
             "title": "Payment processing",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---payment-processing"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---payment-processing"
         },
         "scenario3": {
             "title": "Streaming media",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---streaming-media"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---streaming-media"
         },
         "scenario4": {
             "title": "Ridesharing",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---ridesharing"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---ridesharing"
         },
         "scenario5": {
             "title": "Digital auto design",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---digital-auto-design"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-auto-design"
         },
         "scenario6": {
             "title": "Remote auto maintenance",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---remote-auto-maintenance"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---remote-auto-maintenance"
         },
         "scenario7": {
             "title": "Mobile banking",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---mobile-banking"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---mobile-banking"
         },
         "scenario8": {
             "title": "Crowdfunding",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---crowdfunding"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---crowdfunding"
         },
         "scenario9": {
             "title": "Wearable tech",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---wearable-tech"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---wearable-tech"
         },
         "scenario10": {
             "title": "Online retailer",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---online-retailer"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---online-retailer"
         },
         "scenario11": {
             "title": "Supply chain reinvention",
