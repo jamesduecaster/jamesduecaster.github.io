@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 27 Sep 2016 6:04 PM - JD
+ * last update: 27 Sep 2016 6:06 PM - JD
  */
 
 $(document).ready(function(){
@@ -29,10 +29,10 @@ $(document).ready(function(){
 
     $('.generic-modal-2-content .sector-name').html(thisSectorName);
 
-    $('.genaric-modal-2-content .scenario-1-link').hide();
-    $('.genaric-modal-2-content .scenario-2-link').hide();
-    $('.genaric-modal-2-content .scenario-3-link').hide();
-    $('.genaric-modal-2-content .scenario-4-link').hide();
+    $('.generic-modal-2-content .scenario-1-link').hide();
+    $('.generic-modal-2-content .scenario-2-link').hide();
+    $('.generic-modal-2-content .scenario-3-link').hide();
+    $('.generic-modal-2-content .scenario-4-link').hide();
 
     switch(thisSector) {
     case 'automotive':
