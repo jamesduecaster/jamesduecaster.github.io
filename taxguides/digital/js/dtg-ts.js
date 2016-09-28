@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 28 Sep 2016 4:54 PM - JD
+ * last update: 28 Sep 2016 5:10 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -127,6 +127,8 @@ dtg.setCountryList = function() {
                     versionCount++;
                     var output, countryName, countryISO, tempStyle;
 
+                    var thisScenarioCountryList = eval('dtg.control.scenarios[0].' + thisScenario + '.countries');
+
                     $(this).find('country').each(function() {
 
                         countryName = $(this).text();
@@ -138,10 +140,14 @@ dtg.setCountryList = function() {
                             tempStyle = '';
                         }
 
-                        if (output === undefined) {
-                            output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
-                        } else {
-                            output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
+                        if (thisScenarioCountryList.indexOf(countryISO) !== -1) {
+
+                            if (output === undefined) {
+                                output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
+                            } else {
+                                output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
+                            }
+
                         }
 
                     });
@@ -183,9 +189,7 @@ dtg.setScenarioList = function(scenarioKeys) {
 
     }
 
-    thisScenario = $('#scenarioid').html();
     $('#scenario-dataselector option[data-scenario=' + thisScenario + ']').attr('selected', true);
-
 
     $('#scenario-dataselector').change(function() {
         if ($(this).val() !== '') {
@@ -325,12 +329,13 @@ $(document).ready(function() {
 
     $('.cookienotification').remove();
 
-    dtg.setCountryList();
-
     var countryApreviousText = $('#countryA').text();
 
     thisCountryISO = $('#country-dataselector option:selected').val();
     thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
+    thisScenario = $('#scenarioid').html();
+
+    dtg.setCountryList();
 
     $('.accordion div:nth-child(-n+4)').hover(function() {
 
