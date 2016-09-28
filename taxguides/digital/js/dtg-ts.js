@@ -1,6 +1,6 @@
 /**
- * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 28 Sep 2016 11:13 AM - JD
+ * EY Digital Tax Guide - scenario - 2016 edition JavaScript
+ * last update: 28 Sep 2016 4:33 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
