@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Technology scenario - 2016 edition JavaScript
- * last update: 27 Sep 2016 4:35 PM - JD
+ * last update: 28 Sep 2016 11:13 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -221,75 +221,93 @@ dtg.control = {
     "scenarios": [{
         "scenario1": {
             "title": "Digital advertising",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-advertising"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-advertising",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario2": {
             "title": "Payment processing",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---payment-processing"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---payment-processing",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario3": {
             "title": "Streaming media",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---streaming-media"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---streaming-media",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario4": {
             "title": "Ridesharing",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---ridesharing"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---ridesharing",
+            "countries": "AU, DK, FR, IT"
         },
         "scenario5": {
             "title": "Digital auto design",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-auto-design"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-auto-design",
+            "countries": "AU, DK, FR, IT"
         },
         "scenario6": {
             "title": "Remote auto maintenance",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---remote-auto-maintenance"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---remote-auto-maintenance",
+            "countries": "AU, DK, FR, IT"
         },
         "scenario7": {
             "title": "Mobile banking",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---mobile-banking"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---mobile-banking",
+            "countries": "AU, DK, FR, IT, PH"
         },
         "scenario8": {
             "title": "Crowdfunding",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---crowdfunding"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---crowdfunding",
+            "countries": "AU, DK, FR, IT, PH"
         },
         "scenario9": {
             "title": "Wearable tech",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---wearable-tech"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---wearable-tech",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario10": {
             "title": "Online retailer",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---online-retailer"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---online-retailer",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario11": {
             "title": "Supply chain reinvention",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---supply-chain-reinvention"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---supply-chain-reinvention",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario12": {
             "title": "Drones in business",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---drones-in-business"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---drones-in-business",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario13": {
             "title": "Media content",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---media-content"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---media-content",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario14": {
             "title": "Travel insurance",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---travel-insurance"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---travel-insurance",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario15": {
             "title": "Personal accident insurance",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---personal-accident-insurance"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---personal-accident-insurance",
+            "countries": "AU, DK, FR, IT, JP, PH"
         },
         "scenario16": {
             "title": "Digital value-based care initiatives",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---digital-value-based-care-initiatives"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-value-based-care-initiatives",
+            "countries": "DK, FR, IT"
         },
         "scenario17": {
             "title": "Health care data platform",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---health-care-data-platform"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---health-care-data-platform",
+            "countries": "DK, FR, IT"
         },
         "scenario18": {
             "title": "Medical software",
-            "link": "/gl/en/services/tax/ey-digital-tax-guide---technology-scenario---medical-software"
+            "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---medical-software",
+            "countries": "DK, FR, IT"
         }
     }]
 }
