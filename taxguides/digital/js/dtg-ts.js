@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 28 Sep 2016 4:33 PM - JD
+ * last update: 28 Sep 2016 4:54 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -10,6 +10,7 @@ var isProduction = isLocal === false && isDropbox === false && isPreview === fal
 
 var thisCountryISO;
 var thisCountryName;
+var thisScenario;
 
 var myData;
 
@@ -176,13 +177,13 @@ dtg.setScenarioList = function(scenarioKeys) {
 
         if ($('option[data-scenario="' + scenarioKey + '"]').length === 0) {
 
-            $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '#' + thisCountryISO + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
+            $('<option data-scenario="' + scenarioKey + '" value="' + thisLink + '#' + thisCountryISO + '-' + scenarioKey + '" >' + thisTitle + '</option>').appendTo('#scenario-dataselector');
 
         }
 
     }
 
-    var thisScenario = $('#scenarioid').html();
+    thisScenario = $('#scenarioid').html();
     $('#scenario-dataselector option[data-scenario=' + thisScenario + ']').attr('selected', true);
 
 
@@ -352,7 +353,7 @@ $(document).ready(function() {
 
         $('#countryB').text(thisCountryName);
 
-        location.hash = '#' + thisCountryISO;
+        location.hash = '#' + thisCountryISO + '-' + thisScenario;
 
     });
 
@@ -368,7 +369,8 @@ $(document).ready(function() {
             thisCountryISO = $('#country-dataselector option:selected').val();
             $('#countryISO').html(thisCountryISO);
 
-            thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
+            thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '-' + thisScenario + '"]').html();
+
             $('#countryName').html(thisCountryName);
 
 
@@ -378,23 +380,28 @@ $(document).ready(function() {
 
                 var thisOption = $(this).val();
 
-                var countryHash = currentHash;
+                var countryHash = currentHash.substring(0, currentHash.indexOf('-'));
 
                 if (thisOption === countryHash.toUpperCase()) {
 
                     thisCountryISO = $(this).val();
+
                     $('#countryISO').html(thisCountryISO);
 
                     $('#scenario-dataselector option').each(function() {
+
                         var thisVal = $(this).val();
+
                         if (thisVal.indexOf('#') !== -1) {
-                            thisVal = thisVal.substring(0, thisVal.indexOf('#'))
+                            thisVal = thisVal.substring(0, thisVal.indexOf('#'));
                         }
-                        $(this).val(thisVal + '#' + thisCountryISO);
+
+                        $(this).val(thisVal + '#' + thisCountryISO + '-' + thisScenario);
 
                     });
 
                     thisCountryName = $(this).html();
+
                     $('#countryName').html(thisCountryName);
                     $('#country-dataselector').val(thisOption);
 
