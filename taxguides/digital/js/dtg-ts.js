@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 28 Sep 2016 5:10 PM - JD
+ * last update: 29 Sep 2016 11:49 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -190,6 +190,22 @@ dtg.setScenarioList = function(scenarioKeys) {
     }
 
     $('#scenario-dataselector option[data-scenario=' + thisScenario + ']').attr('selected', true);
+
+    var isSelectedOption = $('#scenario-dataselector option[selected="selected"]').text();
+
+    $("#scenario-dataselector").html($('#scenario-dataselector option').sort(function(x, y) {
+        return $(x).text() < $(y).text() ? -1 : 1;
+    }));
+
+    var j = 0;
+    $("#scenario-dataselector option").each(function() {
+        if ($(this).text() === isSelectedOption) {
+            return false;
+        }
+        j++;
+    });
+
+    $('#scenario-dataselector').get(0).selectedIndex = j;
 
     $('#scenario-dataselector').change(function() {
         if ($(this).val() !== '') {
