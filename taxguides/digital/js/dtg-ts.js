@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 29 Sep 2016 2:33 PM - JD
+ * last update: 29 Sep 2016 4:27 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -243,57 +243,57 @@ dtg.control = {
         "scenario1": {
             "title": "Digital advertising",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-advertising",
-            "countries": "AU, DK, FR, IT, JP, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, JP, MX, NO, PH, PT, US"
         },
         "scenario2": {
             "title": "Payment processing",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---payment-processing",
-            "countries": "AU, DK, FR, IT, JP, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, JP, MX, NO, PH, PT, US"
         },
         "scenario3": {
             "title": "Streaming media",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---streaming-media",
-            "countries": "AU, DK, FR, IT, JP, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, JP, MX, NO, PH, PT, US"
         },
         "scenario4": {
             "title": "Ridesharing",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---ridesharing",
-            "countries": "AU, DK, FR, IT, NO, PT, US"
+            "countries": "AU, DK, FR, IT, MX, NO, PT, US"
         },
         "scenario5": {
             "title": "Digital auto design",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---digital-auto-design",
-            "countries": "AU, DK, FR, IT, NO, PT, US"
+            "countries": "AU, DK, FR, IT, MX, NO, PT, US"
         },
         "scenario6": {
             "title": "Remote auto maintenance",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---remote-auto-maintenance",
-            "countries": "AU, DK, FR, IT, NO, PT, US"
+            "countries": "AU, DK, FR, IT, MX, NO, PT, US"
         },
         "scenario7": {
             "title": "Mobile banking",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---mobile-banking",
-            "countries": "AU, DK, FR, IT, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, MX, NO, PH, PT, US"
         },
         "scenario8": {
             "title": "Crowdfunding",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---crowdfunding",
-            "countries": "AU, DK, FR, IT, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, MX, NO, PH, PT, US"
         },
         "scenario9": {
             "title": "Wearable tech",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---wearable-tech",
-            "countries": "AU, DK, FR, IT, JP, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, JP, MX, NO, PH, PT, US"
         },
         "scenario10": {
             "title": "Online retailer",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---online-retailer",
-            "countries": "AU, DK, FR, IT, JP, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, JP, MX, NO, PH, PT, US"
         },
         "scenario11": {
             "title": "Supply chain reinvention",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---supply-chain-reinvention",
-            "countries": "AU, DK, FR, IT, JP, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, JP, MX, NO, PH, PT, US"
         },
         "scenario12": {
             "title": "Drones in business",
@@ -303,7 +303,7 @@ dtg.control = {
         "scenario13": {
             "title": "Media content",
             "link": "/gl/en/services/tax/ey-digital-tax-guide---scenario---media-content",
-            "countries": "AU, DK, FR, IT, JP, NO, PH, PT, US"
+            "countries": "AU, DK, FR, IT, JP, MX, NO, PH, PT, US"
         },
         "scenario14": {
             "title": "Travel insurance",
