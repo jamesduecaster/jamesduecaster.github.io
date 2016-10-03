@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 29 Sep 2016 4:27 PM - JD
+ * last update: 3 Oct 2016 3:52 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -59,17 +59,26 @@ dtg.getCountryData = function(countryISO) {
             var firstName = thisContactData[i]['firstname'];
             var lastName = thisContactData[i]['lastname'];
             var phone = thisContactData[i]['phone'];
+            /*
             var photo = thisContactData[i]['photo'];
             var photoHTML = '<img src="' + photo + '"/>';
+            */
+
+            var firmName = thisContactData[i]['firmname'];
+            if (firmName === undefined) {
+                firmName = '';
+            }
+
             var title = thisContactData[i]['title'];
 
 
             $('<div class="dtg-contact">' +
-                '<div class="contact-photo">' + photoHTML + '</div>' +
-                '<div class="contact-name"><strong>' + firstName + ' ' + lastName + '</strong></div>' +
+                /* '<div class="contact-photo">' + photoHTML + '</div>' + */
+                '<div class="contact-name"><strong><a href="mailto:' + email + '">' + firstName + ' ' + lastName + '</a></strong></div>' +
                 '<div class="contact-title">' + title + '</div>' +
+                '<div class="contact-title">' + firmname +'</div>' +
                 '<div class="contact-phone">' + phone + '</div>' +
-                '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' +
+                /* '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' + */
                 '</div>').appendTo('.dtg-contacts');
 
             var scenarioKeys = '';
