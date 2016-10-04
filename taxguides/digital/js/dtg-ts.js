@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 3 Oct 2016 4:02 PM - JD
+ * last update: 4 Oct 2016 9:42 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -350,7 +350,7 @@ $(document).ready(function() {
 
     pageHeadings.appendTo('.article-hero-container');
 
-    $('.article-hero-container h4').wrapInner('<a href="http://www.ey.com/gl/en/services/tax/ey-digital-tax-guide-dev"></a>');
+    $('.article-hero-container h4').wrapInner('<a href="http://www.ey.com/gl/en/services/tax/ey-digital-tax-guide"></a>');
 
     $('.cookienotification').remove();
 
