@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 4 Oct 2016 12:42 AM - JD
+ * last update: 4 Oct 2016 3:50 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -354,25 +354,41 @@ $(document).ready(function() {
 
     $('.cookienotification').remove();
 
-    var countryApreviousText = $('#countryA').text();
-
     thisCountryISO = $('#country-dataselector option:selected').val();
     thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();
     thisScenario = $('#scenarioid').html();
 
     dtg.setCountryList();
 
-    $('.accordion div:nth-child(-n+4)').hover(function() {
+    var countryAPreviousText = $('#countryA').text();
+    var countryBPreviousText = $('#countryB').text();
+
+    $('.accordion h3').on('click', function() {
+
+      var isClosed = $(this).parent().hasClass('ui-state-active');
+
+      var hasCountryAClass = $(this).parent().hasClass('countryA');
+      var hasCountryBClass = $(this).parent().hasClass('countryB');
+
+      if(isClosed === false && hasCountryAClass === true) {
 
         $('#countryA').text(thisCountryName);
-        $('#countryB').text('Country B');
+        $('#countryB').text(countryBPreviousText);
 
-    }, function() {
+      } else if(isClosed === false && hasCountryBClass === true) {
 
-        $('#countryA').text(countryApreviousText);
+        $('#countryA').text(countryAPreviousText);
         $('#countryB').text(thisCountryName);
 
+      } else {
+
+        $('#countryA').text(countryAPreviousText);
+        $('#countryB').text(countryBPreviousText);
+
+      }
+
     });
+
 
     $('#country-dataselector').on('change', function() {
 
