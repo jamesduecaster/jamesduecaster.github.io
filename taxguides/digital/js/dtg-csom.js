@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 5 October 2016 11:27 AM - JD
+ * last update: 5 October 2016 11:40 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -191,7 +191,7 @@ function loadTaxBasics() {
           var transformedHtmlVAT = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
 
           /* .maincolumn selector for tax basics page */
-          $('.fig-caption .vat-at-a-glance-note, .fig-caption .vat-at-a-glance-footnote, maincolumn .vat-at-a-glance-note, .maincolumn .vat-at-a-glance-footnote').remove();
+          $('.fig-caption .vat-at-a-glance-note, .fig-caption .vat-at-a-glance-footnote, .maincolumn .vat-at-a-glance-note, .maincolumn .vat-at-a-glance-footnote').remove();
 
           $('#vat-at-a-glance').html(transformedHtmlVAT)
               .before('<h4 class="vat-at-a-glance-note">VAT, GST and Sales Tax Guide**</h4>')
