@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 5 October 2016 10:10 AM - JD
+ * last update: 5 October 2016 11:09 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -14,6 +14,11 @@ var taxGuideURLWCC = '';
 
 var taxGuideYearWCTG = '2016';
 var taxGuideYearVAT = '2016';
+
+var thisCountryISO;
+var thisCountryName;
+var thisOperatingModelVal;
+var thisOperatingModelHTML;
 
 function getCountryList() {
 
@@ -137,11 +142,6 @@ function onScrollInit(items, trigger) {
         });
     });
 }
-
-var thisCountryISO;
-var thisCountryName;
-var thisOperatingModelVal;
-var thisOperatingModelHTML;
 
 
 function loadTaxBasics() {
@@ -364,6 +364,9 @@ $(document).ready(function() {
         }
 
         $('#rccontainer ul').addClass('default-ul');
+
+        /* for tax basics page only */
+        $('#country-name-display').html(thisCountryName);
 
     });
 
