@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 5 October 2016 11:09 AM - JD
+ * last update: 5 October 2016 11:20 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -162,7 +162,8 @@ function loadTaxBasics() {
 
           var transformedHtmlWCTG = getSingleOrArrayHtml(XmlJson.worldFinancialData, 'worldFinancialData', getWorldFinancialDataHtml);
 
-          $('.fig-caption .wctg-at-a-glance-note, .fig-caption .wctg-at-a-glance-footnote').remove();
+          /* .maincolumn selector for tax basics page */
+          $('.fig-caption .wctg-at-a-glance-note, .fig-caption .wctg-at-a-glance-footnote, .maincolumn .wctg-at-a-glance-note, .maincolumn .wctg-at-a-glance-footnote').remove();
 
           $('#wctg-at-a-glance').html(transformedHtmlWCTG)
               .before('<h4 class="wctg-at-a-glance-note">Worldwide Corporate Tax Guide*</h4>')
