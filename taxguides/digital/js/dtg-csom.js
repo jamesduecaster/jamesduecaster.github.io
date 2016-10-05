@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 22 Sep 2016 10:28 AM - JD
+ * last update: 5 October 2016 10:10 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -313,8 +313,13 @@ $(document).ready(function() {
             $('#country-dataselector option').each(function() {
 
                 var thisOption = $(this).val();
+                var countryHash;
 
-                var countryHash = currentHash.substring(0, currentHash.indexOf('-'));
+                if(currentHash.indexOf('-') !== -1) {
+                  countryHash = currentHash.substring(0, currentHash.indexOf('-'));
+                } else {
+                  countryHash = currentHash;
+                }
 
                 if (thisOption === countryHash.toUpperCase()) {
 

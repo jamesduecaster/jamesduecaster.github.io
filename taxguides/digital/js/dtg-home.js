@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 4 October 2016 5:27 PM - JD
+ * last update: 5 October 2016 10:12 AM - JD
  */
 
 $(document).ready(function() {
@@ -15,7 +15,7 @@ $(document).ready(function() {
         var baseHREF = '/gl/en/services/tax/ey-digital-tax-guide---cloud-service-operating-model';
         var baseHREFTaxBasics = '/gl/en/services/tax/ey-digital-tax-guide---tax-basics';
 
-        $('.corp-vat-basics-link').attr('href', baseHREFTaxBasics + '#' + CCTaxGuideCountryISO + '-');
+        $('.corp-vat-basics-link').attr('href', baseHREFTaxBasics + '#' + CCTaxGuideCountryISO);
         $('.commissioned-agent-link').attr('href', baseHREF + '#' + CCTaxGuideCountryISO + '-Commissioned%20agent');
         $('.commissionaire-link').attr('href', baseHREF + '#' + CCTaxGuideCountryISO + '-Commissionaire');
         $('.buy-sell-link').attr('href', baseHREF + '#' + CCTaxGuideCountryISO + '-Buy-sell');
