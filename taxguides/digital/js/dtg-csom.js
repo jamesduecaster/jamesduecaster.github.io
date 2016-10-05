@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 5 October 2016 11:24 AM - JD
+ * last update: 5 October 2016 11:27 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -194,8 +194,8 @@ function loadTaxBasics() {
           $('.fig-caption .vat-at-a-glance-note, .fig-caption .vat-at-a-glance-footnote, maincolumn .vat-at-a-glance-note, .maincolumn .vat-at-a-glance-footnote').remove();
 
           $('#vat-at-a-glance').html(transformedHtmlVAT)
-              .before('<h4 class="vat-at-a-glance-note">VAT, GST and Sales Tax Guide*</h4>')
-              .after('<p class="footnote vat-at-a-glance-footnote">*<a href="' + taxGuidePathVAT + '">See the Worldwide VAT, GST and Sales Tax Guide (' + taxGuideYearVAT + ')</a> for additional information on indirect taxation.</p>');
+              .before('<h4 class="vat-at-a-glance-note">VAT, GST and Sales Tax Guide**</h4>')
+              .after('<p class="footnote vat-at-a-glance-footnote">**<a href="' + taxGuidePathVAT + '">See the Worldwide VAT, GST and Sales Tax Guide (' + taxGuideYearVAT + ')</a> for additional information on indirect taxation.</p>');
 
           $('#vat-at-a-glance a[href^="#section-"]').each(function() {
               $(this).attr('href', taxGuidePathVAT + $(this).attr('href'));
