@@ -1,6 +1,6 @@
 /*
  * Insights JavaScript
- * Last update: 6 October 2016 4:59 PM - JD
+ * Last update: 6 October 2016 5:03 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -761,7 +761,7 @@ eyInsights.parentID = function(currentID) {
 eyInsights.getOutput = function() {
 
     for (var j = 0; j < feedData.length; j++) {
-      if (getReleaseDate(feedData[j]) !== 'Invalid Date') {
+      if (this.getReleaseDate(feedData[j]) !== 'Invalid Date') {
         feedDataVRD.push(feedData[j]);
       } else {
 
