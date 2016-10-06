@@ -1,6 +1,6 @@
 /*
  * Insights JavaScript
- * Last update: 30 September 2016 4:47 PM - JD
+ * Last update: 6 October 2016 4:59 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -14,6 +14,7 @@ var feedPrefixPreview = "http://eycompreview.ey.com/?queryid=";
 var feedPrefixProduction = "http://www.ey.com/?queryid=";
 
 var feedData = [];
+var feedDataVRD = [];
 var feedSourceUrl = [];
 var baseCountry = $.cookie('BaseCountry');
 
@@ -189,9 +190,9 @@ eyInsights.getDate = function(dateRange) {
 
     var adjustedDate = new Date(adjustedDateNumber);
 
-    var year = adjustedDate.getFullYear().toString();
-    var month = (adjustedDate.getMonth() + 1).toString();
-    var date = adjustedDate.getDate().toString();
+    var year = adjustedDate.getUTCFullYear().toString();
+    var month = (adjustedDate.getUTCMonth() + 1).toString();
+    var date = adjustedDate.getUTCDate().toString();
 
     if (month.length === 1) {
         month = '0' + month;
@@ -332,55 +333,51 @@ eyInsights.getReleaseDate = function(doc) {
         }
 
         releaseDate = releaseDate.trim();
-        releaseDate = releaseDate.replace('  ', ' ');
 
-        var releaseDateMonth;
-        var releaseDateMonthNum;
-        var releaseDateDay;
-        var releaseDateYear;
+        /* test releasedate format for YYYYMMDD */
 
-        if (isInteger(releaseDate) === true) {
+        if (parseFloat(releasedate) === parseInt(releasedate) && !isNaN(releasedate) && releasedate.length === 8) {
 
-            releaseDateMonthNum = releaseDate.substring(4, 6);
-            releaseDateDay = releaseDate.substring(6, 8);
-            releaseDateYear = releaseDate.substring(0, 4);
+            var m = releasedate.substring(4, 6);
+            var d = releasedate.substring(6, 8);
+            var y = releasedate.substring(0, 4);
+
+            return new Date(m + ' ' + d + ' ' + y);
+
+        } else if (releasedate.indexOf('-') !== -1) {
+
+            /* releasedate format is YYYY-MM-DD */
+
+            var parts = releasedate.split("-");
+            return new Date(parts[0], parts[1] - 1, parts[2]);
 
         } else {
 
-            releaseDateMonth = releaseDate.substring(0, releaseDate.indexOf(' '));
-            releaseDateDay = releaseDate.substring(releaseDate.indexOf(' ') + 1, releaseDate.lastIndexOf(' '));
-            releaseDateYear = releaseDate.substring(releaseDate.lastIndexOf(' ') + 1, releaseDate.length);
+            /* releasedate format is other string */
 
-            // Mon DD YYYY
-            // Apr 6 2014
-            // Oct 25 2013
+            var d = new Date(releasedate);
 
-            monthsAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            monthsNum = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+            if (Object.prototype.toString.call(d) === "[object Date]") {
 
-            releaseDateMonthNum = '';
+                /* is a date */
+                if (isNaN(d.getTime())) {
 
-            for (var i = 0; i < monthsAbbr.length; i++) {
-                if (releaseDateMonth === monthsAbbr[i] || releaseDateMonth === monthsFull[i]) {
-                    releaseDateMonthNum = monthsNum[i];
+                    /* date is not valid */
+                    return 'Invalid Date';
+
+                } else {
+
+                    /* date is valid */
+                    return d;
+
                 }
+
+            } else {
+
+                /* date is not valid */
+                return 'Invalid Date';
+
             }
-
-        }
-
-        var year = releaseDateYear;
-        var month = releaseDateMonthNum;
-        var day = releaseDateDay;
-
-        var hours = '12';
-        var minutes = '00';
-
-        var d = new Date(Date.UTC(getDateNumber(year), getDateNumber(month) - 1, getDateNumber(day), getDateNumber(hours), getDateNumber(minutes), 0, 0));
-        if (isNaN(d)) {
-            return (null);
-        } else {
-            return (d);
         }
 
     } catch (e) {
@@ -395,68 +392,25 @@ eyInsights.getReleaseDateHTML = function(doc) {
     else return (d.format("%B %Y")) //(d.format("%d %B %Y")); //(d.format("%A, %d %B %Y"));
 }
 
-eyInsights.getReleaseDateNumber = function(doc) {
+eyInsights.getReleaseDateNumber = function(releaseDate) {
 
     try {
 
-        if (doc !== null) {
-            if (doc.releasedate !== undefined) {
-                releaseDate = doc.releasedate;
-            } else {
-                releaseDate = 'Jan 1 2013';
-            }
-        } else {
-            releaseDate = 'Jan 1 2013';
+        var month = (releaseDate.getUTCMonth() + 1).toString();
+        var day = (releaseDate.getUTCDate()).toString();
+        var year = (releaseDate.getUTCFullYear()).toString();
+
+        if (month.length === 1) {
+            month = '0' + month;
         }
-        releaseDate = releaseDate.trim();
-        releaseDate = releaseDate.replace('  ', ' ');
-
-        var releaseDateMonth;
-        var releaseDateMonthNum;
-        var releaseDateDay;
-        var releaseDateYear;
-
-        if (isInteger(releaseDate) === true) {
-
-            releaseDateMonthNum = releaseDate.substring(4, 6);
-            releaseDateDay = releaseDate.substring(6, 8);
-            releaseDateYear = releaseDate.substring(0, 4);
-
-        } else {
-
-            releaseDateMonth = releaseDate.substring(0, releaseDate.indexOf(' '));
-            releaseDateDay = releaseDate.substring(releaseDate.indexOf(' ') + 1, releaseDate.lastIndexOf(' '));
-            releaseDateYear = releaseDate.substring(releaseDate.lastIndexOf(' ') + 1, releaseDate.length);
-
-            monthsAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            monthsNum = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-
-            releaseDateMonthNum = '';
-
-            for (var i = 0; i < monthsAbbr.length; i++) {
-                if (releaseDateMonth === monthsAbbr[i] || releaseDateMonth === monthsFull[i]) {
-                    releaseDateMonthNum = monthsNum[i];
-                }
-            }
-
-        }
-
-        var year = releaseDateYear;
-        var month = releaseDateMonthNum;
-        var day = releaseDateDay;
 
         if (day.length === 1) {
-            day = "0" + day.toString();
+            day = '0' + day;
         }
 
-        var d = year + month + day;
+        var dateNumber = year + month + day;
 
-        if (isNaN(d)) {
-            return (null);
-        } else {
-            return (d);
-        }
+        return dateNumber
 
     } catch (e) {
         return (null);
@@ -564,16 +518,16 @@ eyInsights.insightIDToHash = function(insightID) {
 
 eyInsights.isReleaseDateHidden = function(doc) {
 
-  try {
+    try {
 
-    var hideIt = doc !== null ? doc['insights-hide-releasedate'] : '';
-    hideIt = hideIt !== undefined ? hideIt.toLowerCase() : '';
+        var hideIt = doc !== null ? doc['insights-hide-releasedate'] : '';
+        hideIt = hideIt !== undefined ? hideIt.toLowerCase() : '';
 
-    return hideIt;
+        return hideIt;
 
-  } catch (e) {
-    return (null);
-  }
+    } catch (e) {
+        return (null);
+    }
 
 }
 
@@ -581,36 +535,36 @@ eyInsights.loadDocs = function(filterBy) {
 
     var insightsXPathQuery = '';
 
-    if(filterBy !== undefined && filterBy !== 'recent-insights') {
+    if (filterBy !== undefined && filterBy !== 'recent-insights') {
 
-      var insightsXPathQuery = '';
+        var insightsXPathQuery = '';
 
-      if(filterBy.indexOf('browse-by') !== -1) {
+        if (filterBy.indexOf('browse-by') !== -1) {
 
-        var subCategoryArray = this.childCategories(filterBy).split(',');
+            var subCategoryArray = this.childCategories(filterBy).split(',');
 
-        for (var i = 0; i < subCategoryArray.length; i++) {
+            for (var i = 0; i < subCategoryArray.length; i++) {
 
-          if(insightsXPathQuery === '') {
-            insightsXPathQuery = 'contains(insights-category, "' + subCategoryArray[i] + '")';
-          } else {
-            insightsXPathQuery += ' or contains(insights-category, "' + subCategoryArray[i] + '")';
-          }
+                if (insightsXPathQuery === '') {
+                    insightsXPathQuery = 'contains(insights-category, "' + subCategoryArray[i] + '")';
+                } else {
+                    insightsXPathQuery += ' or contains(insights-category, "' + subCategoryArray[i] + '")';
+                }
+
+            }
+
+        } else {
+
+            insightsXPathQuery = 'contains(insights-category, "' + filterBy + '")';
 
         }
 
-      } else {
-
-              insightsXPathQuery = 'contains(insights-category, "' + filterBy + '")';
-
-      }
-
     } else {
 
-      var todaysDate = eyInsights.getDate();
-      var beginDate = eyInsights.daysAgo(90);
+        var todaysDate = eyInsights.getDate();
+        var beginDate = eyInsights.daysAgo(90);
 
-      insightsXPathQuery = '(translate(releasedate,"-","")>=' + beginDate + ' and translate(releasedate,"-","")<=' + todaysDate + ')';
+        insightsXPathQuery = '(translate(releasedate,"-","")>=' + beginDate + ' and translate(releasedate,"-","")<=' + todaysDate + ')';
 
     }
 
@@ -618,8 +572,8 @@ eyInsights.loadDocs = function(filterBy) {
 
     feedSourceUrl = feedSourceUrls.getUrl('GL');
 
-    if(insightsXPathQuery !== '') {
-      feedSourceUrl = feedSourceUrl + insightsXPathQuery;
+    if (insightsXPathQuery !== '') {
+        feedSourceUrl = feedSourceUrl + insightsXPathQuery;
     }
 
     var backupID = feedSourceUrls.getBackupURL('GL');
@@ -634,21 +588,21 @@ eyInsights.loadDocs = function(filterBy) {
 
         feedData = data.results;
 
-    }).fail(function (jqXHR, textStatus, errorThrown) {
+    }).fail(function(jqXHR, textStatus, errorThrown) {
 
 
-      submitFeedBackupReport('EY Insights', backupID, 'Ajax error - ' + errorThrown, feedSourceURL, baseCountry);
+        submitFeedBackupReport('EY Insights', backupID, 'Ajax error - ' + errorThrown, feedSourceURL, baseCountry);
 
-      var backupQuery = '/content/contentitem';
-      backupQuery += insightsXPathQuery;
+        var backupQuery = '/content/contentitem';
+        backupQuery += insightsXPathQuery;
 
-      feedData = backupOutBoundFeed(backupID, backupQuery, 'json');
-      feedData = $.parseJSON(feedData);
-      feedData = feedData.results;
+        feedData = backupOutBoundFeed(backupID, backupQuery, 'json');
+        feedData = $.parseJSON(feedData);
+        feedData = feedData.results;
 
-      if (feedData[0].error) {
-        submitFeedBackupReport('EY Insights', backupID, 'Backup feed failure', feedSourceURL, baseCountry);
-      }
+        if (feedData[0].error) {
+            submitFeedBackupReport('EY Insights', backupID, 'Backup feed failure', feedSourceURL, baseCountry);
+        }
 
     });
 
@@ -740,34 +694,34 @@ eyInsights.childCategories = function(currentID) {
 
         if (currentID === navID) {
 
-          for (var key in navObj[i]) {
+            for (var key in navObj[i]) {
 
-              if (key === 'subnav') {
-                  var subNavLinkList = '';
+                if (key === 'subnav') {
+                    var subNavLinkList = '';
 
-                  for (var j = 0; j < navObj[i].subnav.length; j++) {
+                    for (var j = 0; j < navObj[i].subnav.length; j++) {
 
-                      var subNavLink = navObj[i].subnav[j].link;
+                        var subNavLink = navObj[i].subnav[j].link;
 
-                      if(subNavLink.indexOf('#') !== -1) {
+                        if (subNavLink.indexOf('#') !== -1) {
 
-                        subNavLink = subNavLink.substring(subNavLink.indexOf('#') + 1, subNavLink.length);
+                            subNavLink = subNavLink.substring(subNavLink.indexOf('#') + 1, subNavLink.length);
 
-                        if(subNavLinkList === '') {
-                          subNavLinkList = subNavLink;
-                        } else {
-                          subNavLinkList += ',' + subNavLink;
+                            if (subNavLinkList === '') {
+                                subNavLinkList = subNavLink;
+                            } else {
+                                subNavLinkList += ',' + subNavLink;
+                            }
+
                         }
 
                     }
 
-                  }
+                }
 
-              }
+            }
 
-          }
-
-          return subNavLinkList;
+            return subNavLinkList;
 
         }
 
@@ -806,25 +760,39 @@ eyInsights.parentID = function(currentID) {
 
 eyInsights.getOutput = function() {
 
-    quickSortDocs(feedData, false, 0, feedData.length);
+    for (var j = 0; j < feedData.length; j++) {
+      if (getReleaseDate(feedData[j]) !== 'Invalid Date') {
+        feedDataVRD.push(feedData[j]);
+      } else {
 
-    for (var i = 0; feedData !== null && typeof(feedData) === "object" && i < feedData.length; i++) {
+        if($('#docswerrors').length === 0) {
+          $('<div id="docswerrors" style="display:none"></div>').appendTo('body');
+        }
+        $('#docswerrors').append('<p>' + feedData[j].title + '</p>');
+      }
+    }
 
-        var insight = this.getInsight(feedData[i]);
-        var heading = this.getHeading(feedData[i]);
-        var subhead = this.getSubhead(feedData[i]);
-        var photoPath = this.getPhotoPath(feedData[i]);
-        var priority = this.getPriority(feedData[i]);
-        var releaseDate = this.getReleaseDateHTML(feedData[i]);
-				var releaseDateHidden = this.isReleaseDateHidden(feedData[i]);
-        var releaseDateNumber = this.getReleaseDateNumber(feedData[i]);
-        var style = this.getStyle(feedData[i]);
-        var share = this.getShare(feedData[i]);
+    quickSortDocs(feedDataVRD, false, 0, feedDataVRD.length);
 
-				var newWindow = feedData[i]['insights-newwindow'];
-				newWindow = newWindow ? newWindow.toLowerCase().trim() : '';
+    for (var i = 0; feedDataVRD !== null && typeof(feedDataVRD) === "object" && i < feedDataVRD.length; i++) {
 
-        var link = feedData[i].link;
+        var releaseDate = this.getReleaseDateHTML(feedDataVRD[i]);
+
+        var releaseDateNumber = this.getReleaseDateNumber(releaseDate);
+        var releaseDateHidden = this.isReleaseDateHidden(feedDataVRD[i]);
+
+        var insight = this.getInsight(feedDataVRD[i]);
+        var heading = this.getHeading(feedDataVRD[i]);
+        var subhead = this.getSubhead(feedDataVRD[i]);
+        var photoPath = this.getPhotoPath(feedDataVRD[i]);
+        var priority = this.getPriority(feedDataVRD[i]);
+        var style = this.getStyle(feedDataVRD[i]);
+        var share = this.getShare(feedDataVRD[i]);
+
+        var newWindow = feedDataVRD[i]['insights-newwindow'];
+        newWindow = newWindow ? newWindow.toLowerCase().trim() : '';
+
+        var link = feedDataVRD[i].link;
         var colorClass = photoPath === '' ? ' color' : '';
 
         var imgDsp;
@@ -854,8 +822,8 @@ eyInsights.getOutput = function() {
 
         var uniqueArrayItems = [];
 
-        $.each(insightArray, function(i, el){
-          if($.inArray(el,uniqueArrayItems) === -1) uniqueArrayItems.push(el);
+        $.each(insightArray, function(i, el) {
+            if ($.inArray(el, uniqueArrayItems) === -1) uniqueArrayItems.push(el);
         });
 
         insightArray = uniqueArrayItems;
@@ -864,13 +832,13 @@ eyInsights.getOutput = function() {
 
         for (j = 0; j < insightArray.length; j++) {
 
-          var thisInsightClass = (this.insightHashToID(insightArray[j])).replace(' & ', '-');
+            var thisInsightClass = (this.insightHashToID(insightArray[j])).replace(' & ', '-');
 
-          if (insightClass === '') {
-              insightClass = thisInsightClass;
-          } else {
-              insightClass += ' ' + thisInsightClass;
-          }
+            if (insightClass === '') {
+                insightClass = thisInsightClass;
+            } else {
+                insightClass += ' ' + thisInsightClass;
+            }
 
         }
 
@@ -929,20 +897,20 @@ eyInsights.getOutput = function() {
 
         var docCountryLang = (contentCountry + '/' + contentLang).toLowerCase();
 
-				var releaseDateHiddenStyle = releaseDateHidden === 'yes' ? 'style="display:none"' : '';
+        var releaseDateHiddenStyle = releaseDateHidden === 'yes' ? 'style="display:none"' : '';
 
-				var newWindowHTML = '';
+        var newWindowHTML = '';
 
-		    if (newWindow === 'yes') {
-		        newWindowHTML = ' target="_blank"';
-		    }
+        if (newWindow === 'yes') {
+            newWindowHTML = ' target="_blank"';
+        }
 
-		    var wrapHeadSubHeadBegin = '';
-		    var wrapHeadSubHeadEnd = '';
-		    if(customStyles.indexOf('-yellow') !== -1) {
-		      wrapHeadSubHeadBegin = '<div class="wrap-head-subhead">';
-		      wrapHeadSubHeadEnd = '</div>';
-		    }
+        var wrapHeadSubHeadBegin = '';
+        var wrapHeadSubHeadEnd = '';
+        if (customStyles.indexOf('-yellow') !== -1) {
+            wrapHeadSubHeadBegin = '<div class="wrap-head-subhead">';
+            wrapHeadSubHeadEnd = '</div>';
+        }
 
 
         if (link.toLowerCase().indexOf('gl/en') !== -1) { // is a global doc
@@ -960,6 +928,7 @@ eyInsights.getOutput = function() {
         }
 
     } /* end for */
+
 
     $grid = $('#tile-container').isotope({
         itemSelector: '.tile',
@@ -1035,11 +1004,11 @@ eyInsights.renderToPage = function(backgroundImgStyle, colorClass, customStyles,
         '</div>' +
         '</div>' +
         imgMaskDsp +
-				wrapHeadSubHeadBegin +
+        wrapHeadSubHeadBegin +
         '<h3>' + heading + '</h3>' +
         '<h5>' + subhead + '</h5>' +
         '<p class="releasedate" ' + releaseDateHiddenStyle + '>' + releaseDate + '</p>' +
-				wrapHeadSubHeadEnd +
+        wrapHeadSubHeadEnd +
         '</div>' +
         '</a>';
 
@@ -1056,7 +1025,7 @@ eyInsights.renderToPage = function(backgroundImgStyle, colorClass, customStyles,
 var feedSourceUrlSuffix = '&mode=json&query=/content/contentitem';
 
 var feedSourceUrls = {
-    'GL' /* Global - ey-insights-datafeed */ : {
+    'GL' /* Global - ey-insights-datafeed */: {
         id: 'OBF-USDD-8WXQCJ' + feedSourceUrlSuffix,
         local: 'ey-insights-feed.js'
     }
@@ -1172,20 +1141,20 @@ $(document).ready(function() {
         }
     });
 
-  $(window).hashchange();
+    $(window).hashchange();
 
-  $('#nav-open-btn').on('click', function() {});
+    $('#nav-open-btn').on('click', function() {});
 
-  $('#nav ul li a, .cbmissues a').on('click', function() {
+    $('#nav ul li a, .cbmissues a').on('click', function() {
 
-      insightID = $(this).attr('id');
-      if (insightID !== undefined) {
-          var insightHash = this.insightIDToHash(insightID);
-          /* CBM-- Analytics.TrackEvent("nav link", "click", insightHash, null); */
-          this.displayInsight(insightID);
-      }
+        insightID = $(this).attr('id');
+        if (insightID !== undefined) {
+            var insightHash = this.insightIDToHash(insightID);
+            /* CBM-- Analytics.TrackEvent("nav link", "click", insightHash, null); */
+            this.displayInsight(insightID);
+        }
 
-  });
+    });
 
 });
 
