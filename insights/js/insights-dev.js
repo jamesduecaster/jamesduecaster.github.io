@@ -1,6 +1,6 @@
 /*
  * Insights JavaScript
- * Last update: 6 October 2016 9:11 PM - JD
+ * Last update: 7 October 2016 9:58 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -332,22 +332,22 @@ eyInsights.getReleaseDate = function(doc) {
 
         releaseDate = releaseDate.trim();
 
-        /* test releasedate format for YYYYMMDD */
+        if (releaseDate.indexOf('-') !== -1) {
 
-        if (parseFloat(releaseDate) === parseInt(releaseDate) && !isNaN(releaseDate) && releaseDate.length === 8) {
+            /* releasedate format is YYYY-MM-DD */
+
+            var parts = releaseDate.split("-");
+            return new Date(parts[0], parts[1] - 1, parts[2]);
+
+        } else if (parseFloat(releaseDate) === parseInt(releaseDate) && !isNaN(releaseDate) && releaseDate.length === 8) {
+
+            /* releasedate format is YYYYMMDD */
 
             var m = releaseDate.substring(4, 6);
             var d = releaseDate.substring(6, 8);
             var y = releaseDate.substring(0, 4);
 
             return new Date(m + ' ' + d + ' ' + y);
-
-        } else if (releaseDate.indexOf('-') !== -1) {
-
-            /* releasedate format is YYYY-MM-DD */
-
-            var parts = releaseDate.split("-");
-            return new Date(parts[0], parts[1] - 1, parts[2]);
 
         } else {
 
