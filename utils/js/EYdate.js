@@ -2,7 +2,7 @@
 
 EYdate.js
 29 May 2016 - JFL
-JD 6 Oct 2016 - JD
+ 6 Oct 2016 - JD
 
 releaseDate received from OBF
 
