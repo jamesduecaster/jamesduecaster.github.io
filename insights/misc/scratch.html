@@ -1,0 +1,122 @@
+<script>
+
+
+
+/* getreleasedatenumber
+
+  if (doc !== null) {
+      if (doc.releasedate !== undefined) {
+          releaseDate = doc.releasedate;
+      } else {
+          releaseDate = 'Jan 1 2013';
+      }
+  } else {
+      releaseDate = 'Jan 1 2013';
+  }
+  releaseDate = releaseDate.trim();
+  releaseDate = releaseDate.replace('  ', ' ');
+
+  var releaseDateMonth;
+  var releaseDateMonthNum;
+  var releaseDateDay;
+  var releaseDateYear;
+
+  if (isInteger(releaseDate) === true) {
+
+      releaseDateMonthNum = releaseDate.substring(4, 6);
+      releaseDateDay = releaseDate.substring(6, 8);
+      releaseDateYear = releaseDate.substring(0, 4);
+
+  } else {
+
+      releaseDateMonth = releaseDate.substring(0, releaseDate.indexOf(' '));
+      releaseDateDay = releaseDate.substring(releaseDate.indexOf(' ') + 1, releaseDate.lastIndexOf(' '));
+      releaseDateYear = releaseDate.substring(releaseDate.lastIndexOf(' ') + 1, releaseDate.length);
+
+      monthsAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      monthsNum = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+
+      releaseDateMonthNum = '';
+
+      for (var i = 0; i < monthsAbbr.length; i++) {
+          if (releaseDateMonth === monthsAbbr[i] || releaseDateMonth === monthsFull[i]) {
+              releaseDateMonthNum = monthsNum[i];
+          }
+      }
+
+  }
+
+  var year = releaseDateYear;
+  var month = releaseDateMonthNum;
+  var day = releaseDateDay;
+
+  if (day.length === 1) {
+      day = "0" + day.toString();
+  }
+
+  var d = year + month + day;
+
+  if (isNaN(d)) {
+      return (null);
+  } else {
+      return (d);
+  }
+
+  */
+
+
+/* get releasedate
+
+        var releaseDateMonth;
+        var releaseDateMonthNum;
+        var releaseDateDay;
+        var releaseDateYear;
+
+        if (isInteger(releaseDate) === true) {
+
+            releaseDateMonthNum = releaseDate.substring(4, 6);
+            releaseDateDay = releaseDate.substring(6, 8);
+            releaseDateYear = releaseDate.substring(0, 4);
+
+        } else {
+
+            releaseDateMonth = releaseDate.substring(0, releaseDate.indexOf(' '));
+            releaseDateDay = releaseDate.substring(releaseDate.indexOf(' ') + 1, releaseDate.lastIndexOf(' '));
+            releaseDateYear = releaseDate.substring(releaseDate.lastIndexOf(' ') + 1, releaseDate.length);
+
+            // Mon DD YYYY
+            // Apr 6 2014
+            // Oct 25 2013
+
+            monthsAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            monthsNum = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+
+            releaseDateMonthNum = '';
+
+            for (var i = 0; i < monthsAbbr.length; i++) {
+                if (releaseDateMonth === monthsAbbr[i] || releaseDateMonth === monthsFull[i]) {
+                    releaseDateMonthNum = monthsNum[i];
+                }
+            }
+
+        }
+
+        var year = releaseDateYear;
+        var month = releaseDateMonthNum;
+        var day = releaseDateDay;
+
+        var hours = '12';
+        var minutes = '00';
+
+        var d = new Date(Date.UTC(getDateNumber(year), getDateNumber(month) - 1, getDateNumber(day), getDateNumber(hours), getDateNumber(minutes), 0, 0));
+        if (isNaN(d)) {
+            return (null);
+        } else {
+            return (d);
+        }
+
+        */
+
+</script>

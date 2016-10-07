@@ -357,10 +357,8 @@ eyInsights.getReleaseDate = function(doc) {
 
             if (Object.prototype.toString.call(d) === "[object Date]") {
 
-                /* is a date */
                 if (isNaN(d.getTime())) {
 
-                    /* date is not valid */
                     return 'Invalid Date';
 
                 } else {
@@ -372,7 +370,6 @@ eyInsights.getReleaseDate = function(doc) {
 
             } else {
 
-                /* date is not valid */
                 return 'Invalid Date';
 
             }
