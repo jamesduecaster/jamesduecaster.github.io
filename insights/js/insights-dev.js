@@ -1,6 +1,6 @@
 /*
  * Insights JavaScript
- * Last update: 6 October 2016 5:03 PM - JD
+ * Last update: 6 October 2016 9:11 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -19,8 +19,6 @@ var feedSourceUrl = [];
 var baseCountry = $.cookie('BaseCountry');
 
 var eyInsights = eyInsights || {};
-
-delete console;
 
 jQuery.fn.outerWidth = function() {
 
@@ -113,7 +111,7 @@ eyInsights.daysAgo = function(numberOfDays) {
 };
 
 eyInsights.debugIt = function(debuggery) {
-    //console.log(debuggery);
+    /* console.log(debuggery); */
     $('#debugit').append(debuggery + '<br />');
 };
 
@@ -326,36 +324,36 @@ eyInsights.getReleaseDate = function(doc) {
             if (doc.releasedate !== undefined) {
                 releaseDate = doc.releasedate;
             } else {
-                releaseDate = 'Jan 1 2013';
+                releaseDate = '20130101';
             }
         } else {
-            releaseDate = 'Jan 1 2013';
+            releaseDate = '20130101';
         }
 
         releaseDate = releaseDate.trim();
 
         /* test releasedate format for YYYYMMDD */
 
-        if (parseFloat(releasedate) === parseInt(releasedate) && !isNaN(releasedate) && releasedate.length === 8) {
+        if (parseFloat(releaseDate) === parseInt(releaseDate) && !isNaN(releaseDate) && releaseDate.length === 8) {
 
-            var m = releasedate.substring(4, 6);
-            var d = releasedate.substring(6, 8);
-            var y = releasedate.substring(0, 4);
+            var m = releaseDate.substring(4, 6);
+            var d = releaseDate.substring(6, 8);
+            var y = releaseDate.substring(0, 4);
 
             return new Date(m + ' ' + d + ' ' + y);
 
-        } else if (releasedate.indexOf('-') !== -1) {
+        } else if (releaseDate.indexOf('-') !== -1) {
 
             /* releasedate format is YYYY-MM-DD */
 
-            var parts = releasedate.split("-");
+            var parts = releaseDate.split("-");
             return new Date(parts[0], parts[1] - 1, parts[2]);
 
         } else {
 
             /* releasedate format is other string */
 
-            var d = new Date(releasedate);
+            var d = new Date(releaseDate);
 
             if (Object.prototype.toString.call(d) === "[object Date]") {
 
@@ -776,8 +774,8 @@ eyInsights.getOutput = function() {
 
     for (var i = 0; feedDataVRD !== null && typeof(feedDataVRD) === "object" && i < feedDataVRD.length; i++) {
 
-        var releaseDate = this.getReleaseDateHTML(feedDataVRD[i]);
-
+        var releaseDate = this.getReleaseDate(feedDataVRD[i]);
+        var releaseDateHTML = this.getReleaseDateHTML(feedDataVRD[i]);
         var releaseDateNumber = this.getReleaseDateNumber(releaseDate);
         var releaseDateHidden = this.isReleaseDateHidden(feedDataVRD[i]);
 
@@ -915,15 +913,15 @@ eyInsights.getOutput = function() {
 
         if (link.toLowerCase().indexOf('gl/en') !== -1) { // is a global doc
 
-            this.renderToPage(backgroundImgStyle, colorClass, customStyles, heading, imgMaskDsp, insightClass, link, newWindowHTML, noImageClass, priorityStyles, releaseDate, releaseDateHiddenStyle, releaseDateNumber, subhead, wrapHeadSubHeadBegin, wrapHeadSubHeadEnd);
+            this.renderToPage(backgroundImgStyle, colorClass, customStyles, heading, imgMaskDsp, insightClass, link, newWindowHTML, noImageClass, priorityStyles, releaseDateHTML, releaseDateHiddenStyle, releaseDateNumber, subhead, wrapHeadSubHeadBegin, wrapHeadSubHeadEnd);
 
         } else if (link.toLowerCase().indexOf(docCountryLang) !== -1) { //matching country/lang
 
-            this.renderToPage(backgroundImgStyle, colorClass, customStyles, heading, imgMaskDsp, insightClass, link, newWindowHTML, noImageClass, priorityStyles, releaseDate, releaseDateHiddenStyle, releaseDateNumber, subhead, wrapHeadSubHeadBegin, wrapHeadSubHeadEnd);
+            this.renderToPage(backgroundImgStyle, colorClass, customStyles, heading, imgMaskDsp, insightClass, link, newWindowHTML, noImageClass, priorityStyles, releaseDateHTML, releaseDateHiddenStyle, releaseDateNumber, subhead, wrapHeadSubHeadBegin, wrapHeadSubHeadEnd);
 
         } else if (share.indexOf(docCountryLang) !== -1) {
 
-            this.renderToPage(backgroundImgStyle, colorClass, customStyles, heading, imgMaskDsp, insightClass, link, newWindowHTML, noImageClass, priorityStyles, releaseDate, releaseDateHiddenStyle, releaseDateNumber, subhead, wrapHeadSubHeadBegin, wrapHeadSubHeadEnd);
+            this.renderToPage(backgroundImgStyle, colorClass, customStyles, heading, imgMaskDsp, insightClass, link, newWindowHTML, noImageClass, priorityStyles, releaseDateHTML, releaseDateHiddenStyle, releaseDateNumber, subhead, wrapHeadSubHeadBegin, wrapHeadSubHeadEnd);
 
         }
 
