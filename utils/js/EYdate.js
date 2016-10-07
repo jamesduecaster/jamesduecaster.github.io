@@ -51,10 +51,8 @@ function EYdate(releaseDate) {
 
             if (Object.prototype.toString.call(d) === "[object Date]") {
 
-                /* is a date */
                 if (isNaN(d.getTime())) {
 
-                    /* date is not valid */
                     return 'Invalid Date';
 
                 } else {
@@ -66,7 +64,6 @@ function EYdate(releaseDate) {
 
             } else {
 
-                /* date is not valid */
                 return 'Invalid Date';
 
             }
@@ -74,7 +71,6 @@ function EYdate(releaseDate) {
 
     } else {
 
-        /* date is not valid */
         return 'Invalid Date';
 
     }
