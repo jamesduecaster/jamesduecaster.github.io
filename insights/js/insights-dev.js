@@ -1,6 +1,6 @@
 /*
  * Insights JavaScript
- * Last update: 7 October 2016 9:58 AM - JD
+ * Last update: 7 October 2016 11:08 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -324,10 +324,10 @@ eyInsights.getReleaseDate = function(doc) {
             if (doc.releasedate !== undefined) {
                 releaseDate = doc.releasedate;
             } else {
-                releaseDate = '20130101';
+                releaseDate = '2013-01-01';
             }
         } else {
-            releaseDate = '20130101';
+            releaseDate = '2013-01-01';
         }
 
         releaseDate = releaseDate.trim();
