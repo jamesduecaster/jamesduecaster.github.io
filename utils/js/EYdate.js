@@ -75,7 +75,7 @@ function EYdate(releaseDate) {
     } else {
 
         /* date is not valid */
-				return 'Invalid Date';
+        return 'Invalid Date';
 
     }
 }
