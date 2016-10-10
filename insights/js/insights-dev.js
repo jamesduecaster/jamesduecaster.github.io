@@ -1,6 +1,6 @@
 /*
  * Insights JavaScript
- * Last update: 9 October 2016 8:18 PM - JD
+ * Last update: 10 October 2016 1:30 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -1159,6 +1159,9 @@ $(document).ready(function() {
 $(window).load(function() {
 
     $('.subnavToggle').on('click', function() {
+
+        $('.local-sub').hide();
+
         if ($(this).next('ol').css('display') === 'none') {
             $(this).next('ol').show();
         } else {
