@@ -6,12 +6,12 @@ eyInsights.control = {
         },
         "navigation": [{
             "title": "Recent insights",
-            "link": "/GR/en/Issues/Insights---DEV#recent-insights",
+            "link": "/gr/en/issues/insights#recent-insights",
             "id": "insights-recent-insights",
             "intro-copy": ""
         }, {
             "title": "Browse by role",
-            "link": "/GR/en/Issues/Insights---DEV#browse-by-role",
+            "link": "/gr/en/issues/insights#browse-by-role",
             "id": "insights-browse-by-role",
             "intro-copy": "<h1>By role</h1>",
             "subnav": [{
@@ -31,7 +31,7 @@ eyInsights.control = {
                 "intro-copy": "<h1>CDO</h1>"
             }, {
                 "title": "CEO",
-                "link": "/GR/en/Issues/Insights---DEV#ceo",
+                "link": "/gr/en/issues/insights#ceo",
                 "id": "insights-ceo",
                 "intro-copy": "<h1>CEO</h1>"
             }, {
@@ -51,7 +51,7 @@ eyInsights.control = {
                 "intro-copy": "<h1>COO</h1>"
             }, {
                 "title": "CRO",
-                "link": "/GR/en/Issues/Insights---DEV#cro",
+                "link": "/gr/en/issues/insights#cro",
                 "id": "insights-cro",
                 "intro-copy": "<h1>CRO</h1>"
             }, {
@@ -61,7 +61,7 @@ eyInsights.control = {
                 "intro-copy": "<h1>CSMO</h1>"
             }, {
                 "title": "HR director",
-                "link": "/GR/en/Issues/Insights---DEV#hr-director",
+                "link": "/gr/en/issues/insights#hr-director",
                 "id": "insights-hr-director",
                 "intro-copy": "<h1>HR director</h1>"
             }, {
@@ -72,7 +72,7 @@ eyInsights.control = {
             }]
         }, {
             "title": "Browse by topic",
-            "link": "/GR/en/Issues/Insights---DEV#browse-by-topic",
+            "link": "/gr/en/issues/insights#browse-by-topic",
             "id": "insights-browse-by-topic",
             "intro-copy": "<h1>By topic</h1>",
             "subnav": [{
@@ -92,12 +92,12 @@ eyInsights.control = {
                 "intro-copy": "<h1>Capital allocation</h1>"
             }, {
                 "title": "Cybersecurity",
-                "link": "/GR/en/Issues/Insights---DEV#cybersecurity",
+                "link": "/gr/en/issues/insights#cybersecurity",
                 "id": "insights-cybersecurity",
                 "intro-copy": "<h1>Cybersecurity</h1>"
             }, {
                 "title": "Digital",
-                "link": "/GR/en/Issues/Insights---DEV#digital",
+                "link": "/gr/en/issues/insights#digital",
                 "id": "insights-digital",
                 "intro-copy": "<h1>Digital</h1>"
             }, {
@@ -162,7 +162,7 @@ eyInsights.control = {
                 "intro-copy": "<h1>Mergers and acquistions</h1>"
             }, {
                 "title": "Operational effectiveness",
-                "link": "/GR/en/Issues/Insights---DEV#operational-effectiveness",
+                "link": "/gr/en/issues/insights#operational-effectiveness",
                 "id": "insights-operational-effectiveness",
                 "intro-copy": "<h1>Operational effectiveness</h1>"
             }, {
@@ -172,12 +172,12 @@ eyInsights.control = {
                 "intro-copy": "<h1>Public policy</h1>"
             }, {
                 "title": "Reporting",
-                "link": "/GR/en/Issues/Insights---DEV#reporting",
+                "link": "/gr/en/issues/insights#reporting",
                 "id": "insights-reporting",
                 "intro-copy": "<h1>Reporting</h1>"
             }, {
                 "title": "Risk",
-                "link": "/GR/en/Issues/Insights---DEV#risk",
+                "link": "/gr/en/issues/insights#risk",
                 "id": "insights-risk",
                 "intro-copy": "<h1>Risk</h1>"
             }, {
@@ -187,7 +187,7 @@ eyInsights.control = {
                 "intro-copy": "<h1>Transformation</h1>"
             }, {
                 "title": "Women in business",
-                "link": "/GR/en/Issues/Insights---DEV#women-in-business",
+                "link": "/gr/en/issues/insights#women-in-business",
                 "id": "insights-women-in-business",
                 "intro-copy": "<h1>Women in business</h1>"
             },{
@@ -198,47 +198,47 @@ eyInsights.control = {
             }]
         },  {
             "title": "Browse by megatrends",
-            "link": "/GR/en/Issues/Insights---DEV#browse-by-megatrends",
+            "link": "/gr/en/issues/insights#browse-by-megatrends",
             "id": "insights-browse-by-megatrends",
             "intro-copy": "<h1>By megatrends</h1>",
             "subnav": [{
                 "title": "Behavioral revolution",
-                "link": "/GR/en/Issues/Insights---DEV#behavioral-revolution",
+                "link": "/gr/en/issues/insights#behavioral-revolution",
                 "id": "insights-behavioral-revolution",
                 "intro-copy": "<h1>Behavioral revolution</h1>"
             }, {
                 "title": "Empowered customer",
-                "link": "/GR/en/Issues/Insights---DEV#empowered-customer",
+                "link": "/gr/en/issues/insights#empowered-customer",
                 "id": "insights-empowered-customer",
                 "intro-copy": "<h1>Empowered customer</h1>"
             }, {
                 "title": "Health reimagined",
-                "link": "/GR/en/Issues/Insights---DEV#health-reimagined",
+                "link": "/gr/en/issues/insights#health-reimagined",
                 "id": "insights-health-reimagined",
                 "intro-copy": "<h1>Health reimagined</h1>"
             }, {
                 "title": "Industry redefined",
-                "link": "/GR/en/Issues/Insights---DEV#industry-redefined",
+                "link": "/gr/en/issues/insights#industry-redefined",
                 "id": "insights-industry-redefined",
                 "intro-copy": "<h1>Industry redefined</h1>"
             }, {
                 "title": "Resourceful planet",
-                "link": "/GR/en/Issues/Insights---DEV#resourceful-planet",
+                "link": "/gr/en/issues/insights#resourceful-planet",
                 "id": "insights-resourceful-planet",
                 "intro-copy": "<h1>Resourceful planet</h1>"
             }, {
                 "title": "The future of smart",
-                "link": "/GR/en/Issues/Insights---DEV#the-future-of-smart",
+                "link": "/gr/en/issues/insights#the-future-of-smart",
                 "id": "insights-the-future-of-smart",
                 "intro-copy": "<h1>The future of smart</h1>"
             }, {
                 "title": "The future of work",
-                "link": "/GR/en/Issues/Insights---DEV#the-future-of-work",
+                "link": "/gr/en/issues/insights#the-future-of-work",
                 "id": "insights-the-future-of-work",
                 "intro-copy": "<h1>The future of work</h1>"
             }, {
                 "title": "Urban world",
-                "link": "/GR/en/Issues/Insights---DEV#urban-world",
+                "link": "/gr/en/issues/insights#urban-world",
                 "id": "insights-urban-world",
                 "intro-copy": "<h1>Urban world</h1>"
             }]

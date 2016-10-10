@@ -2,7 +2,7 @@
 
 EYdate.js
 29 May 2016 - JFL
- 7 Oct 2016 - JD
+ 9 Oct 2016 - JD
 
 releaseDate received from OBF
 
@@ -41,7 +41,7 @@ function EYdate(releaseDate) {
             var d = releaseDate.substring(6, 8);
             var y = releaseDate.substring(0, 4);
 
-            return new Date(m + ' ' + d + ' ' + y);
+            return new Date(y, m, d);
 
         } else {
 

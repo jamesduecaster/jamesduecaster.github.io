@@ -1,6 +1,6 @@
 /*
  * Insights JavaScript
- * Last update: 7 October 2016 11:08 AM - JD
+ * Last update: 9 October 2016 8:18 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -347,7 +347,7 @@ eyInsights.getReleaseDate = function(doc) {
             var d = releaseDate.substring(6, 8);
             var y = releaseDate.substring(0, 4);
 
-            return new Date(m + ' ' + d + ' ' + y);
+            return new Date(y, m, d);
 
         } else {
 
@@ -755,6 +755,8 @@ eyInsights.parentID = function(currentID) {
 
 eyInsights.getOutput = function() {
 
+    feedDataVRD = [];
+
     for (var j = 0; j < feedData.length; j++) {
       if (this.getReleaseDate(feedData[j]) !== 'Invalid Date') {
         feedDataVRD.push(feedData[j]);
@@ -1020,7 +1022,7 @@ eyInsights.renderToPage = function(backgroundImgStyle, colorClass, customStyles,
 var feedSourceUrlSuffix = '&mode=json&query=/content/contentitem';
 
 var feedSourceUrls = {
-    'GL' /* Global - ey-insights-datafeed */: {
+    'GL' /* Global - ey-insights-datafeed: 8WXQCJ | insights-gl: 9RERAR  */: {
         id: 'OBF-USDD-8WXQCJ' + feedSourceUrlSuffix,
         local: 'ey-insights-feed.js'
     }
