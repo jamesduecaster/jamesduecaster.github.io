@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 10 Oct 2016 10:00 AM - JD
+ * last update: 10 Oct 2016 5:14 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -53,54 +53,63 @@ dtg.getCountryData = function(countryISO) {
 
         $('.dtg-contact').remove();
 
-        for (var i = 0; i < thisContactData.length; i++) {
+        if (thisContactData) {
 
-            var email = thisContactData[i]['email'];
-            var firstName = thisContactData[i]['firstname'];
-            var lastName = thisContactData[i]['lastname'];
-            var phone = thisContactData[i]['phone'];
-            /*
-            var photo = thisContactData[i]['photo'];
-            var photoHTML = '<img src="' + photo + '"/>';
-            */
+            for (var i = 0; i < thisContactData.length; i++) {
 
-            var firmName = thisContactData[i]['firmname'];
-            if (firmName === undefined) {
-                firmName = '';
-            }
+                var email = thisContactData[i]['email'];
+                var firstName = thisContactData[i]['firstname'];
+                var lastName = thisContactData[i]['lastname'];
+                var phone = thisContactData[i]['phone'];
+                /*
+                var photo = thisContactData[i]['photo'];
+                var photoHTML = '<img src="' + photo + '"/>';
+                */
 
-            var title = thisContactData[i]['title'];
-
-
-            $('<div class="dtg-contact">' +
-                /* '<div class="contact-photo">' + photoHTML + '</div>' + */
-                '<div class="contact-name"><strong><a href="mailto:' + email + '">' + firstName + ' ' + lastName + '</a></strong></div>' +
-                '<div class="contact-title">' + title + '</div>' +
-                '<div class="contact-title">' + firmName +'</div>' +
-                '<div class="contact-phone">' + phone + '</div>' +
-                /* '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' + */
-                '</div>').appendTo('.dtg-contacts');
-
-            var scenarioKeys = '';
-
-            var allScenariosData = myData.scenarios;
-            for (var key in allScenariosData) {
-                //var value = allScenariosData[key];
-                if (scenarioKeys === '') {
-                    scenarioKeys = key;
-                } else {
-                    scenarioKeys += ',' + key;
+                var firmName = thisContactData[i]['firmname'];
+                if (firmName === undefined) {
+                    firmName = '';
                 }
+
+                var title = thisContactData[i]['title'];
+
+
+                $('<div class="dtg-contact">' +
+                    /* '<div class="contact-photo">' + photoHTML + '</div>' + */
+                    '<div class="contact-name"><strong><a href="mailto:' + email + '">' + firstName + ' ' + lastName + '</a></strong></div>' +
+                    '<div class="contact-title">' + title + '</div>' +
+                    '<div class="contact-title">' + firmName + '</div>' +
+                    '<div class="contact-phone">' + phone + '</div>' +
+                    /* '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' + */
+                    '</div>').appendTo('.dtg-contacts');
+
             }
 
-            dtg.setScenarioList(scenarioKeys);
+        } else {
 
-            $('.retrieving-contents').hide();
+          /* hide the contacts section */
+          $('#section1').hide();
 
         }
 
+        var scenarioKeys = '';
+
+        var allScenariosData = myData.scenarios;
+        for (var key in allScenariosData) {
+            //var value = allScenariosData[key];
+            if (scenarioKeys === '') {
+                scenarioKeys = key;
+            } else {
+                scenarioKeys += ',' + key;
+            }
+        }
+
+        dtg.setScenarioList(scenarioKeys);
+
+        $('.retrieving-contents').hide();
+
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.log("GET error: jq:" + jqXHR + ' - ts:' + textStatus + ' - et: ' + errorThrown);
+        console.log("getCountryData error: jq:" + jqXHR + ' - ts:' + textStatus + ' - et: ' + errorThrown);
     });
 
 
@@ -170,7 +179,7 @@ dtg.setCountryList = function() {
         });
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        //console.log("GET error: jq:" + jqXHR +' - ts:' + textStatus + ' - et: ' + errorThrown);
+        console.log("setCountryList error: jq:" + jqXHR +' - ts:' + textStatus + ' - et: ' + errorThrown);
     });
 
 }
@@ -365,27 +374,27 @@ $(document).ready(function() {
 
     $('.accordion h3').on('click', function() {
 
-      var isClosed = $(this).parent().hasClass('ui-state-active');
+        var isClosed = $(this).parent().hasClass('ui-state-active');
 
-      var hasCountryAClass = $(this).parent().hasClass('countryA');
-      var hasCountryBClass = $(this).parent().hasClass('countryB');
+        var hasCountryAClass = $(this).parent().hasClass('countryA');
+        var hasCountryBClass = $(this).parent().hasClass('countryB');
 
-      if(isClosed === false && hasCountryAClass === true) {
+        if (isClosed === false && hasCountryAClass === true) {
 
-        $('#countryA').text(thisCountryName);
-        $('#countryB').text(countryBPreviousText);
+            $('#countryA').text(thisCountryName);
+            $('#countryB').text(countryBPreviousText);
 
-      } else if(isClosed === false && hasCountryBClass === true) {
+        } else if (isClosed === false && hasCountryBClass === true) {
 
-        $('#countryA').text(countryAPreviousText);
-        $('#countryB').text(thisCountryName);
+            $('#countryA').text(countryAPreviousText);
+            $('#countryB').text(thisCountryName);
 
-      } else {
+        } else {
 
-        $('#countryA').text(countryAPreviousText);
-        $('#countryB').text(countryBPreviousText);
+            $('#countryA').text(countryAPreviousText);
+            $('#countryB').text(countryBPreviousText);
 
-      }
+        }
 
     });
 
