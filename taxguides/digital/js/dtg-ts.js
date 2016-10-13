@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 13 Oct 2016 9:07 AM - JD
+ * last update: 13 Oct 2016 4:01 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -364,7 +364,7 @@ $(document).ready(function() {
 
     $('.article-hero-container h4').wrapInner('<a href="http://www.ey.com/gl/en/services/tax/ey-digital-tax-guide"></a>');
 
-    $('.cookienotification').remove();
+    $('<p class="dtg-disclaimer">This material has been prepared for general informational purposes only and is not intended to be relied upon as accounting, tax, or other professional advice. Please refer to your advisors for specific advice.</p>').insertAfter('#scenario-qa');
 
     thisCountryISO = $('#country-dataselector option:selected').val();
     thisCountryName = $('#country-dataselector option[value="' + thisCountryISO + '"]').html();

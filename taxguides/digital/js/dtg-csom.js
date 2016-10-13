@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 5 October 2016 12:27 PM - JD
+ * last update: 13 October 2016 4:06 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -257,9 +257,9 @@ function renderGenericModal() {
 
 $(document).ready(function() {
 
-    $('.cookienotification').remove();
-
     $('<div class="retrieving-contents"><img src="/Media/vwLUExtFile/jquery/$FILE/ajax-loader.gif"> Getting content...</div>').appendTo('body');
+
+    $('<p class="dtg-disclaimer">This material has been prepared for general informational purposes only and is not intended to be relied upon as accounting, tax, or other professional advice. Please refer to your advisors for specific advice.</p>').insertAfter('.country-data');
 
     renderGenericModal();
 
