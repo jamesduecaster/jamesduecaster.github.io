@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 12 Oct 2016 3:48 PM - JD
+ * last update: 13 Oct 2016 9:07 AM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -84,6 +84,9 @@ dtg.getCountryData = function(countryISO) {
                     '</div>').appendTo('.dtg-contacts');
 
             }
+
+            /* show the contacts section */
+            $('#section1').show();
 
         } else {
 
