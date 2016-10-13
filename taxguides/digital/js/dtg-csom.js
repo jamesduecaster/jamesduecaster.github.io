@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 13 October 2016 4:06 PM - JD
+ * last update: 13 October 2016 4:17 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -259,7 +259,7 @@ $(document).ready(function() {
 
     $('<div class="retrieving-contents"><img src="/Media/vwLUExtFile/jquery/$FILE/ajax-loader.gif"> Getting content...</div>').appendTo('body');
 
-    $('<p class="dtg-disclaimer">This material has been prepared for general informational purposes only and is not intended to be relied upon as accounting, tax, or other professional advice. Please refer to your advisors for specific advice.</p>').insertAfter('.country-data');
+    $('<p class="dtg-disclaimer os-animation" data-os-animation="fadeInRight" data-os-animation-delay="0">This material has been prepared for general informational purposes only and is not intended to be relied upon as accounting, tax, or other professional advice. Please refer to your advisors for specific advice.</p>').insertAfter('.country-data');
 
     renderGenericModal();
 
