@@ -1,6 +1,6 @@
 /**
  * EY Insights CSS
- * Last update: 14 October 2016 10:18 AM - JD
+ * Last update: 17 October 2016 11:50 AM - JD
  */
 
 .js body {
@@ -76,7 +76,7 @@
     color: #333333;
 }
 #tile-container h5 {
-    margin-top: 10px;
+    margin-top: 8px;
     font-weight: normal;
     font-size: .875em;
 }
@@ -131,7 +131,8 @@
 }
 
 .tile h3 {
-    margin-top: 10px;
+    font-size: 1em;
+    margin-top: 8px;
     color: #369;
 }
 
