@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 17 Oct 2016 10:18 PM - JD
+ * last update: 17 Oct 2016 5:39 PM - JD
  */
 
 var isLocal = location.href.indexOf("localhost") >= 0 || location.href.indexOf("C:/") >= 0;
@@ -12,9 +12,17 @@ var thisCountryISO;
 var thisCountryName;
 var thisScenario;
 
-var myData;
+var isScenarioListPage = false;
+
+var thisCountryData;
 
 var dtg = dtg || {};
+
+dtg.getAllScenariosData = function() {
+
+  return dtg.control.scenarios;
+
+}
 
 dtg.getCountryData = function(countryISO) {
 
@@ -35,8 +43,8 @@ dtg.getCountryData = function(countryISO) {
         async: false
     }).done(function(data) {
 
-        myData = data;
-        var thisScenarioData = eval('myData.scenarios.' + scenario);
+        thisCountryData = data;
+        var thisScenarioData = eval('thisCountryData.scenarios.' + scenario);
 
         $('#scenario-a1').html(thisScenarioData.a1);
         $('#scenario-a2').html(thisScenarioData.a2);
@@ -48,7 +56,7 @@ dtg.getCountryData = function(countryISO) {
         if (thisScenarioData.contacts !== undefined) {
             thisContactData = thisScenarioData.contacts;
         } else {
-            thisContactData = myData.contacts;
+            thisContactData = thisCountryData.contacts;
         }
 
         $('.dtg-contact').remove();
@@ -97,9 +105,9 @@ dtg.getCountryData = function(countryISO) {
 
         var scenarioKeys = '';
 
-        var allScenariosData = myData.scenarios;
-        for (var key in allScenariosData) {
-            //var value = allScenariosData[key];
+        var thisCountryScenarioData = thisCountryData.scenarios;
+        for (var key in thisCountryScenarioData) {
+            //var value = thisCountryScenarioData[key];
             if (scenarioKeys === '') {
                 scenarioKeys = key;
             } else {
@@ -118,6 +126,23 @@ dtg.getCountryData = function(countryISO) {
 
 }
 
+dtg.getDocLocation = function() {
+
+  var docLocation = location.href.toLowerCase();
+
+  return docLocation;
+
+}
+
+dtg.getObjectSize = function(obj) {
+  var size = 0, key; // get the size data
+
+  for (key in obj) { // check the okeys in the object
+    if (obj.hasOwnProperty(key)) size++; // increase the size
+  }
+
+  return size; // return the size of the object
+}
 
 dtg.setCountryList = function() {
 
@@ -148,7 +173,11 @@ dtg.setCountryList = function() {
                     versionCount++;
                     var output, countryName, countryISO, tempStyle;
 
-                    var thisScenarioCountryList = eval('dtg.control.scenarios[0].' + thisScenario + '.countries');
+                    if( isScenarioListPage === false ) {
+                      //thisScenario = 'scenario1';
+                      var thisScenarioCountryList = eval('dtg.control.scenarios[0].' + thisScenario + '.countries');
+
+                    }
 
                     $(this).find('country').each(function() {
 
@@ -161,19 +190,43 @@ dtg.setCountryList = function() {
                             tempStyle = '';
                         }
 
-                        if (thisScenarioCountryList.indexOf(countryISO) !== -1) {
+                        if( isScenarioListPage === false ) {
 
-                            if (output === undefined) {
-                                output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
-                            } else {
-                                output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
-                            }
+                          if (thisScenarioCountryList.indexOf(countryISO) !== -1) {
+
+                              if (output === undefined) {
+                                  output = '<option' + tempStyle + ' value="' + countryISO + '" selected>' + countryName + '</option>';
+                              } else {
+                                  output += '<option' + tempStyle + ' value="' + countryISO + '">' + countryName + '</option>';
+                              }
+
+                          }
+
+                        } else {
+
+                              output = '<div class="changelabel"><h3>' + countryName + '</h3></div><div data-country-iso="' + countryISO +'"><ul class="default-ul"></ul></div>';
+
+                              $(output).appendTo('#scenario-list-container');
+
+                              dtg.setScenarioListPage(countryISO);
 
                         }
 
                     });
 
-                    $('#country-dataselector').html(output);
+                    if( isScenarioListPage === false ) {
+
+                      $('#country-dataselector').html(output);
+
+                    } else {
+
+                      $('.scenario-list-accordion').accordion({
+                        collapsible: true,
+                        active: 'none',
+                        heightStyle: 'content'
+                      });
+
+                    }
 
                 });
 
@@ -189,18 +242,20 @@ dtg.setCountryList = function() {
 
 
 dtg.setScenarioList = function(scenarioKeys) {
-
+  console.log('SCENARIOKEYS');
+  console.log(scenarioKeys);
     var scenarioKeysArray = scenarioKeys.split(',');
-    var allScenariosData = dtg.control.scenarios[0];
+    var allScenariosData = dtg.getAllScenariosData();
 
     $('#scenario-dataselector').html('');
 
     for (var i = 0; i < scenarioKeysArray.length; i++) {
 
         var scenarioKey = scenarioKeysArray[i];
-
-        var thisTitle = eval('allScenariosData.' + scenarioKey + '.title');
-        var thisLink = eval('allScenariosData.' + scenarioKey + '.link');
+        console.log('SCENARIOKEY');
+        console.log(scenarioKey);
+        var thisTitle = eval('allScenariosData[0].' + scenarioKey + '.title');
+        var thisLink = eval('allScenariosData[0].' + scenarioKey + '.link');
 
         if ($('option[data-scenario="' + scenarioKey + '"]').length === 0) {
 
@@ -237,6 +292,32 @@ dtg.setScenarioList = function(scenarioKeys) {
 
 }
 
+dtg.setScenarioListPage = function(countryISO) {
+
+  var allScenariosData = dtg.getAllScenariosData();
+
+  var allScenariosDataLength = dtg.getObjectSize(allScenariosData[0]);
+
+  for (var i = 1; i <= allScenariosDataLength; i++) {
+
+    var thisScenarioCountryList = eval('allScenariosData[0].scenario' + i + '.countries');
+
+    if(thisScenarioCountryList.indexOf(countryISO) !== -1) {
+
+      var thisScenarioTitle = eval('allScenariosData[0].scenario' + i + '.title');
+      var thisScenarioLink = eval('allScenariosData[0].scenario' + i + '.link');
+
+      $('<li><a data-scenario="' + thisScenarioTitle + '" href="' + thisScenarioLink +'#' + countryISO  + '-' + 'scenario' + i + '">' + thisScenarioTitle + '</a></li>').appendTo($('[data-country-iso="' + countryISO + '"] ul'));
+
+    }
+
+  }
+
+  $('[data-country-iso="' + countryISO + '"] ul').html($('[data-country-iso="' + countryISO + '"] ul li').sort(function(x, y) {
+       return $(x).text() < $(y).text() ? -1 : 1;
+  }));
+
+}
 
 dtg.onScrollInit = function(items, trigger) {
     items.each(function() {
@@ -354,7 +435,12 @@ dtg.control = {
     }]
 }
 
+
 $(document).ready(function() {
+
+    if(dtg.getDocLocation().indexOf('---scenario-list') !== -1) {
+      isScenarioListPage = true;
+    }
 
     $('.eyhero').addClass('reduce-height');
 
@@ -466,7 +552,9 @@ $(document).ready(function() {
 
         }
 
-        dtg.getCountryData(thisCountryISO);
+        if( isScenarioListPage === false ) {
+          dtg.getCountryData(thisCountryISO);
+        }
 
     });
 
