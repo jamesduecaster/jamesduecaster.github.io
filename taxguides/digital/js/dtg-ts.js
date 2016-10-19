@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 19 Oct 2016 3:15 PM - JD
+ * last update: 19 Oct 2016 3:35 PM - JD
 
 
  * Analytics 2016-08-29
@@ -302,8 +302,7 @@ dtg.setCountryList = function() {
 
 
 dtg.setScenarioList = function(scenarioKeys) {
-  console.log('SCENARIOKEYS');
-  console.log(scenarioKeys);
+
     var scenarioKeysArray = scenarioKeys.split(',');
     var allScenariosData = dtg.getAllScenariosData();
 
@@ -312,8 +311,6 @@ dtg.setScenarioList = function(scenarioKeys) {
     for (var i = 0; i < scenarioKeysArray.length; i++) {
 
         var scenarioKey = scenarioKeysArray[i];
-        console.log('SCENARIOKEY');
-        console.log(scenarioKey);
         var thisTitle = eval('allScenariosData[0].' + scenarioKey + '.title');
         var thisLink = eval('allScenariosData[0].' + scenarioKey + '.link');
 
@@ -619,5 +616,22 @@ $(document).ready(function() {
     });
 
     $(window).hashchange();
+
+});
+
+$(window).load(function(){
+
+  $('.accordion h3').on('click', function() {
+
+    var selectedCountry = $('#country-dataselector option:selected').text();
+    var selectedScenario = $('#scenario-dataselector option:selected').text();
+
+    if($(this).parent().hasClass('ui-state-active')) {
+      Analytics.TrackEvent('Section', 'Close', selectedCountry + ' - ' + selectedScenario + ' - QA ' + ($(this).text()).substring(0, 2));
+    } else {
+      Analytics.TrackEvent('Section', 'Open', selectedCountry + ' - ' + selectedScenario + ' - QA ' + ($(this).text()).substring(0, 2));
+    }
+
+  });
 
 });
