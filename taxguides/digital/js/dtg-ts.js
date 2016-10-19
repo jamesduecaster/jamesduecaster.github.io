@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 19 Oct 2016 3:35 PM - JD
+ * last update: 19 Oct 2016 4:23 PM - JD
 
 
  * Analytics 2016-08-29
@@ -627,9 +627,9 @@ $(window).load(function(){
     var selectedScenario = $('#scenario-dataselector option:selected').text();
 
     if($(this).parent().hasClass('ui-state-active')) {
-      Analytics.TrackEvent('Section', 'Close', selectedCountry + ' - ' + selectedScenario + ' - QA ' + ($(this).text()).substring(0, 2));
+      Analytics.TrackEvent('Section', 'Close', 'Country: ' + selectedCountry + ' - Scenario: ' + selectedScenario + ' - QA ' + ($(this).text()).substring(0, 2));
     } else {
-      Analytics.TrackEvent('Section', 'Open', selectedCountry + ' - ' + selectedScenario + ' - QA ' + ($(this).text()).substring(0, 2));
+      Analytics.TrackEvent('Section', 'Open', 'Country: ' + selectedCountry + ' - Scenario: ' + selectedScenario + ' - QA ' + ($(this).text()).substring(0, 2));
     }
 
   });
