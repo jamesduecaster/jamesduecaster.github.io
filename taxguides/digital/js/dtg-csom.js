@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 19 October 2016 12:47 AM - JD
+ * last update: 19 October 2016 4:26 PM - JD
 
 
  * Analytics 2016-08-29
@@ -453,5 +453,22 @@ $(document).ready(function() {
     });
 
     $(window).hashchange();
+
+});
+
+$(window).load(function(){
+
+  $('.accordion h3').on('click', function() {
+
+    var selectedCountry = $('#country-dataselector option:selected').text();
+    var selectedModel = $('#model-dataselector option:selected').text();
+
+    if($(this).parent().hasClass('ui-state-active')) {
+      Analytics.TrackEvent('Section', 'Close', 'Country: ' + selectedCountry + ' - Model: ' + selectedModel + ' - Contents: ' + $(this).text());
+    } else {
+      Analytics.TrackEvent('Section', 'Open', 'Country: ' + selectedCountry + ' - Model: ' + selectedModel + ' - Contents: ' + $(this).text());
+    }
+
+  });
 
 });
