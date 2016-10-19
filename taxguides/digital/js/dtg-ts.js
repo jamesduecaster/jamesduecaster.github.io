@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 19 Oct 2016 12:32 PM - JD
+ * last update: 19 Oct 2016 3:15 PM - JD
 
 
  * Analytics 2016-08-29
@@ -145,7 +145,7 @@ dtg.getCountryData = function(countryISO) {
                 $('<div class="dtg-contact">' +
                     /* '<div class="contact-photo">' + photoHTML + '</div>' + */
                     '<div class="contact-name"><strong><a href="mailto:' + email + '">' + firstName + ' ' + lastName + '</a></strong></div>' +
-                    '<div class="contact-title">' + title + '</div>' +
+                    /* '<div class="contact-title">' + title + '</div>' + */
                     '<div class="contact-title">' + firmName + '</div>' +
                     '<div class="contact-phone">' + phone + '</div>' +
                     /* '<div class="contact-email"><a href="mailto:' + email + '">' + email + '</a></div>' + */
