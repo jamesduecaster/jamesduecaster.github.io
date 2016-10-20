@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 October 2016 1:11 AM - JD
+ * last update: 20 October 2016 11:07 AM - JD
 
 
  * Analytics 2016-08-29
@@ -59,7 +59,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 /* Digital Tax */
 
  Analytics.EnableHashTracking();
- Analytics.AddProperty('UA-49161163-9');
+ Analytics.AddProperty('UA-49161163-17');
  Analytics.TrackAll();
 
  IOM.init("https://acm.us.na.ey.net/iom/generic.js", null, null, null, function() {
