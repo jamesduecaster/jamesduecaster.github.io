@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 October 2016 1:07 AM - JD
+ * last update: 19 October 2016 1:11 AM - JD
 
 
  * Analytics 2016-08-29
@@ -73,7 +73,7 @@ $(document).ready(function() {
         var CCTaxGuideCountryISO = $(this).attr('data-iso');
         var CCTaxGuideCountryName = $(this).html();
 
-        Analytics.TrackEvent('Home - CC Tax info country selection', 'Click', CCtaxGuideCountryName);
+        Analytics.TrackEvent('Home - CC Tax info country selection', 'Click', CCTaxGuideCountryName);
 
         $('.country-name').html(CCTaxGuideCountryName);
 
