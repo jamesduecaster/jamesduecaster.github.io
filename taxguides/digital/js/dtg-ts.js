@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - scenario - 2016 edition JavaScript
- * last update: 20 Oct 2016 11:06 AM - JD
+ * last update: 20 Oct 2016 12:34 PM - JD
 
 
  * Analytics 2016-08-29
@@ -216,13 +216,13 @@ dtg.getObjectSize = function(obj) {
 dtg.setCountryList = function() {
 
     $.ajax({
-        url: '/Media/vwLUExtFile/Global_tax_guides/$FILE/taxguides_relatedcontent_versions_test.xml',
+        url: '/Media/vwLUExtFile/ey-digital-tax-guide/$FILE/dtg-scenario-country-list.xml',
         type: 'GET',
         dataType: 'xml',
         async: false
     }).done(function(data) {
 
-        var taxGuideTitleDTG = "Digital Tax Guide";
+        var taxGuideTitleDTG = "Worldwide Digital Tax Guide";
         var taxGuideTitle;
 
         $(data).find('destination').each(function() {

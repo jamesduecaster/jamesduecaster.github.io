@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - Cloud service operating model - 2016 edition JavaScript
- * last update: 20 October 2016 11:08 AM - JD
+ * last update: 20 October 2016 12:56 PM - JD
 
 
  * Analytics 2016-08-29
@@ -49,7 +49,7 @@
 
  /*!
  Waypoints - 4.0.0
- Copyright Â© 2011-2015 Caleb Troughton
+ Copyright ￃﾂￂﾩ 2011-2015 Caleb Troughton
  Licensed under the MIT license.
  https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
  */
@@ -418,7 +418,14 @@ $(document).ready(function() {
             $('#model-dataselector option').each(function() {
 
                 var thisOption = $(this).html();
-                var modelHash = unescape(currentHash.substring(currentHash.indexOf('-') + 1, currentHash.length));
+                var modelHash;
+
+                if(currentHash.indexOf('-') === -1) {
+                  currentHash = '#' + thisCountryISO + '-' + 'Commissioned agent';
+                  location.hash = currentHash;
+                }
+
+                modelHash = unescape(currentHash.substring(currentHash.indexOf('-') + 1, currentHash.length));
 
                 if (thisOption === modelHash) {
 
