@@ -1,6 +1,6 @@
 /**
  * EY Digital Tax Guide - 2016 edition JavaScript
- * last update: 19 October 2016 1:04 AM - JD
+ * last update: 19 October 2016 1:07 AM - JD
 
 
  * Analytics 2016-08-29
@@ -181,7 +181,7 @@ $(document).ready(function() {
                 $('.generic-modal-2-content .scenario-4-link h3').html('');
                 break;
             case 'life-sciences':
-                $('.generic-modal-2-content .scenario-1-link').attr('href', 'javascript:Analytics.TrackEvent(\'Home - Scenario selection\', \'Click\', \'Digital value-based care initiatives\');location.href=\'' + scenarioBaseHREF + 'digital-value-based care-initiatives\'').show();
+                $('.generic-modal-2-content .scenario-1-link').attr('href', 'javascript:Analytics.TrackEvent(\'Home - Scenario selection\', \'Click\', \'Digital value-based care initiatives\');location.href=\'' + scenarioBaseHREF + 'digital-value-based-care-initiatives\'').show();
 
                 $('.generic-modal-2-content .scenario-1-link h3').html('Digital value-based care initiatives');
 
